@@ -32,7 +32,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "audio_config.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -54,7 +54,8 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void     Codec_Reset(void);
+uint32_t Codec_WriteRegister(uint8_t RegisterAddr, uint16_t RegisterValue);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
