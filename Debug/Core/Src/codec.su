@@ -1,0 +1,5 @@
+codec.c:81:10:Codec_TIMEOUT_UserCallback	0	static
+codec.c:88:10:Codec_Init	0	static
+codec.c:166:6:Codec_CtrlInterface_Init	0	static
+codec.c:195:6:Codec_AudioInterface_Init	0	static
+codec.c:227:6:Codec_GPIO_Init	0	static

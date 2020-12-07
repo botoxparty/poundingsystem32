@@ -32,6 +32,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "CONSTANTS.h"
 #include "audio_config.h"
 /* USER CODE END Includes */
 
