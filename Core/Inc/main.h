@@ -83,7 +83,7 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-void     Codec_Reset(void);
+void     Codec_Init(void);
 uint32_t Codec_WriteRegister(uint8_t RegisterAddr, uint16_t RegisterValue);
 /* USER CODE END EFP */
 

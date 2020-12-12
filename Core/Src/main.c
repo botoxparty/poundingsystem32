@@ -52,6 +52,11 @@ const uint16_t w8731_init_data[] =
 	0x001			// Reg 09: Active Control
 };
 
+bool demoMode = true;
+bool freeze = false;
+bool sequencerIsOn = true;
+extern ADSR_t adsr;
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -140,10 +145,10 @@ int main(void)
   HAL_I2S_MspInit(&hi2s2);
 
 
-	Synth_Init();
+  Synth_Init();
 
   // Start the audio codec
-  Codec_Reset();
+  Codec_Init();
 
   // Transmit audio data
   HAL_I2S_Transmit_DMA(&hi2s2, (uint16_t*)&audiobuff[0], 2*BUFF_LEN); // size must be in bytes
@@ -479,7 +484,7 @@ static void MX_GPIO_Init(void)
   * @param  None
   * @retval None
   */
-void Codec_Reset(void)
+void Codec_Init(void)
 {
   uint8_t i;
 
@@ -523,6 +528,36 @@ uint32_t Codec_WriteRegister(uint8_t RegisterAddr, uint16_t RegisterValue)
       // data is the start pointer of our array
 	/* Return the verifying value: 0 (Passed) or 1 (Failed) */
 	return status;
+}
+
+
+/**
+  * @brief  Tx Transfer completed callbacks.
+  * @param  hi2s: I2S handle
+  * @retval None
+  */
+void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
+{
+  if(hi2s->Instance == SPI2)
+  {
+    /* Call the user function which will manage directly transfer complete */
+	  make_sound((uint16_t *)(audiobuff + BUFF_LEN_DIV2), BUFF_LEN_DIV4);
+  }
+}
+
+/**
+  * @brief  Tx Half Transfer completed callbacks.
+  * @param  hi2s: I2S handle
+  * @retval None
+  */
+void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
+{
+  if(hi2s->Instance == SPI2)
+  {
+    /* Manage the remaining file size and new address offset: This function should
+       be coded by user (its prototype is already declared in stm32f4_discovery_audio.h) */  
+  	make_sound((uint16_t *)audiobuff, BUFF_LEN_DIV4);
+  }
 }
 /* USER CODE END 4 */
 
