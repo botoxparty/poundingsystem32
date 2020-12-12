@@ -43,11 +43,7 @@ soundGen.c:375:6:FM_OP4_freq_set	8	static
 soundGen.c:379:6:FM_OP4_modInd_set	0	static
 soundGen.c:383:6:FM_OP4_freqMul_inc	0	static
 soundGen.c:389:6:FM_OP4_freqMul_dec	0	static
-<<<<<<< HEAD
 soundGen.c:397:6:Synth_Init	16	static
-=======
-soundGen.c:397:6:Synth_Init	24	static
->>>>>>> 54948e272e6d3f53981a80f0825caa1c75506f22
 soundGen.c:129:6:Synth_reset	0	static
 soundGen.c:432:6:sequencer_newStep_action	16	static
 soundGen.c:485:6:sequencer_newSequence_action	8	static
