@@ -1,0 +1,15 @@
+resonantFilter.c:52:6:SVF_setReso	0	static
+resonantFilter.c:82:6:SVF_recalcFreq	8	static
+resonantFilter.c:90:6:SVF_setDrive	0	static
+resonantFilter.c:101:6:SVF_directSetFilterValue	16	static
+resonantFilter.c:58:6:SVF_initialize	16	static
+resonantFilter.c:109:6:SVF_init	8	static
+resonantFilter.c:116:7:Filter1Freq_set	8	static
+resonantFilter.c:122:7:Filter1Res_set	0	static
+resonantFilter.c:127:6:Filter1Drive_set	0	static
+resonantFilter.c:132:7:Filter1Type_set	8	static
+resonantFilter.c:138:7:Filter2Freq_set	8	static
+resonantFilter.c:144:7:Filter2Res_set	0	static
+resonantFilter.c:149:6:Filter2Drive_set	0	static
+resonantFilter.c:154:7:Filter2Type_set	8	static
+resonantFilter.c:161:7:SVF_calcSample	56	static

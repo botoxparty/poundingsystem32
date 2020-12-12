@@ -1,0 +1,4 @@
+random.c:45:6:randomGen_init	8	static
+random.c:62:9:frand_a_b	16	static
+random.c:72:9:randomNum	8	static
+random.c:84:9:MIDIrandVal	8	static

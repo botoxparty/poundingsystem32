@@ -1,0 +1,4 @@
+timers.c:42:6:TimingDelay_Decrement	0	static
+timers.c:56:10:getTime	0	static
+timers.c:61:6:setTime	0	static
+timers.c:87:6:DebounceUserButton	0	static

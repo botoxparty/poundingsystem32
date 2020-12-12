@@ -33,7 +33,35 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "CONSTANTS.h"
-#include "audio_config.h"
+#include "audio_conf.h"
+
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+
+/* Local includes ------------------------------------------------------------------*/
+// #include "stm32f4xx_hal.h"
+// #include "stm32f4_discovery.h"
+// #include "stm32f4_discovery_audio.h"
+// #include "stm32f4_discovery_accelerometer.h"
+// #include <stdio.h>
+// #include "stm32f4xx_it.h"
+// #include "lis302dl.h"
+
+// #include "usbh_MIDI.h"
+#include "MIDI_application.h"
+#include "timers.h"
+#include "soundGen.h"
+#include "delay.h"
+#include "chorusFD.h"
+#include "random.h"
+// #include "CONSTANTS.h"
+#include "drifter.h"
+#include "resonantFilter.h"
+#include "adsr.h"
+#include "sequencer.h"
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
