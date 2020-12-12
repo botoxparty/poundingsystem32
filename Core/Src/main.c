@@ -150,16 +150,6 @@ int main(void)
 
   static unsigned short pin_state = 0;
 
-	/* send some fake data into the I2S callback */
-	for(state=0;state<8;state++)
-	{
-		for(idx=0;idx<BUFF_LEN/2;idx++)
-		{
-			tx_buffer[2*idx+0] = state*BUFF_LEN/2 + idx;
-			tx_buffer[2*idx+1] = state*BUFF_LEN/2 + idx;
-		}
-		I2S_RX_CallBack(tx_buffer, rx_buffer, BUFF_LEN);
-	}
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -486,18 +476,19 @@ uint32_t Codec_WriteRegister(uint8_t RegisterAddr, uint16_t RegisterValue)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 
- 	uint8_t data[3];
-
-    data[0] = RegisterAddr;     // 0x0C in your example
-    data[1] = RegisterValue>>8;    // MSB byte of 16bit data
-    data[2] = RegisterValue;       // LSB byte of 16bit data
+ 	uint8_t data[2];
 
 
-    status = HAL_I2C_Master_Transmit(&hi2c2, W8731_ADDR_0, data, 3, CODEC_LONG_TIMEOUT);  // data is the start pointer of our array
+	/* Assemble 2-byte data in WM8731 format */
+    data[0] = ((RegisterAddr<<1)&0xFE) | ((RegisterValue>>8)&0x01);     // 0x0C in your example
+    data[1] = RegisterValue&0xFF;    // MSB byte of 16bit data
+
+
+    status = HAL_I2C_Master_Transmit(&hi2c2, CODEC_ADDRESS, data, 2, CODEC_LONG_TIMEOUT);  // data is the start pointer of our array
     /* Check the communication status */
     if(status != HAL_OK)
     {
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, 1);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 1);
         // Error handling, for example re-initialization of the I2C peripheral
         Error_Handler();
     }
