@@ -1,0 +1,7 @@
+phaser.c:51:6:PhaserInit	0	static
+phaser.c:64:6:Phaser_Rate_set	0	static
+phaser.c:70:6:Phaser_Feedback_set	0	static
+phaser.c:75:6:Phaser_Wet_set	0	static
+phaser.c:80:6:PhaserRate	0	static
+phaser.c:86:6:PhaserFeedback	0	static
+phaser.c:101:7:Phaser_compute	24	static

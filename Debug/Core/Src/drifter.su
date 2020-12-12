@@ -1,0 +1,9 @@
+drifter.c:35:6:Drifter_amp_set	0	static
+drifter.c:41:6:Drifter_minFreq_set	0	static
+drifter.c:47:6:Drifter_maxFreq_set	0	static
+drifter.c:60:6:drifter_newSegment	8	static
+drifter.c:71:7:drifter_nextSample	8	static
+drifter.c:82:7:d1_drifter_nextSample	0	static
+drifter.c:87:7:d2_drifter_nextSample	0	static
+drifter.c:92:6:drifter_prepare	0	static
+drifter.c:102:6:drifter_init	8	static

@@ -1,0 +1,4 @@
+MIDI_application.c:36:6:MIDI_Application	0	static
+MIDI_application.c:68:6:MagicFX	8	static
+MIDI_application.c:93:6:MagicPatch	8	static
+MIDI_application.c:157:6:Reset_notes_On	0	static
