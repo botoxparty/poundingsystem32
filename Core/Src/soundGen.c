@@ -397,7 +397,7 @@ void FM_OP4_freqMul_dec(uint8_t val) {
 void Synth_Init(void) {
 
 	vol = env = 1;
-	sound = MORPH_SAW;
+	sound = WT_SINE;
 	autoFilterON = false;
 	autoSound = 0;
 	chorusON = false;
@@ -406,7 +406,7 @@ void Synth_Init(void) {
 
 	Delay_init();
 	drifter_init();
-	//pitchGen_init();
+//	pitchGen_init();
 	sequencer_init();
 	ADSR_init(&adsr);
 	Chorus_init();
@@ -504,6 +504,8 @@ void make_sound(uint16_t *buf, uint16_t length) // To be used with the Sequencer
 
 	outp = buf;
 
+	currentNote = 45;
+
 	for (pos = 0; pos < length; pos++) {
 		/*--- Sequencer actions and update ---*/
 		//sequencer_process(); //computes f0 and calls sequencer_newStep_action() and sequencer_newSequence_action()
@@ -512,7 +514,7 @@ void make_sound(uint16_t *buf, uint16_t length) // To be used with the Sequencer
 			sequencer_process(); //computes f0 and calls sequencer_newStep_action() and sequencer_newSequence_action()
 		} else {
 			f0 = notesFreq[currentNote];
-			vol = (float) velocity / 127.0f;
+			vol = (float) 127 / 127.0f;
 		}
 
 		/*--- compute vibrato modulation ---*/

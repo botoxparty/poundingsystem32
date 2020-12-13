@@ -34,7 +34,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-uint16_t adcValArray[4];
 int nLoop = 0;
 
 const uint16_t w8731_init_data[] =
@@ -52,9 +51,9 @@ const uint16_t w8731_init_data[] =
 	0x001			// Reg 09: Active Control
 };
 
-bool demoMode = true;
+bool demoMode = false;
 bool freeze = false;
-bool sequencerIsOn = true;
+bool sequencerIsOn = false;
 extern ADSR_t adsr;
 
 /* USER CODE END PD */
@@ -79,6 +78,9 @@ UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 
+uint16_t adcValArray[4];
+uint16_t audiobuff[1]; // THE audio buffer
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -97,7 +99,7 @@ static void MX_RNG_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-uint16_t audiobuff[1]; // THE audio buffer
+
 /* USER CODE END 0 */
 
 /**
@@ -107,7 +109,8 @@ uint16_t audiobuff[1]; // THE audio buffer
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-//  audiobuff[0] = 5000;
+
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -116,9 +119,6 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-//  Audio_Init();
-//
-//  Codec_Init(48000);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -137,14 +137,14 @@ int main(void)
   MX_USART1_UART_Init();
   MX_RNG_Init();
   /* USER CODE BEGIN 2 */
+
   // Start reading pots
   HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcValArray, 4);
-
 
   // Initialise I2S
   HAL_I2S_MspInit(&hi2s2);
 
-
+  // Start the synth
   Synth_Init();
 
   // Start the audio codec
@@ -153,18 +153,18 @@ int main(void)
   // Transmit audio data
   HAL_I2S_Transmit_DMA(&hi2s2, (uint16_t*)&audiobuff[0], DMA_MAX((2*BUFF_LEN)/AUDIODATA_SIZE)); // size must be in bytes
 
-  static unsigned short pin_state = 0;
-
+  static unsigned short bpm_led_state = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  pin_state = !pin_state;
-
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, pin_state);
-		  HAL_Delay(adcValArray[1]);
+	  bpm_led_state = !bpm_led_state;
+//	  autoSound_set(1);
+//	  sound = WT_SINE;
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, bpm_led_state);
+		  HAL_Delay((int) adcValArray[0] << 4);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -215,8 +215,8 @@ void SystemClock_Config(void)
     Error_Handler();
   }
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2S;
-  PeriphClkInitStruct.PLLI2S.PLLI2SN = 100;
-  PeriphClkInitStruct.PLLI2S.PLLI2SR = 2;
+  PeriphClkInitStruct.PLLI2S.PLLI2SN = 144;
+  PeriphClkInitStruct.PLLI2S.PLLI2SR = 3;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -469,6 +469,40 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PA5 */
+  GPIO_InitStruct.Pin = GPIO_PIN_5;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA6 PA7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PC4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI2_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
@@ -555,6 +589,12 @@ void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
        be coded by user (its prototype is already declared in stm32f4_discovery_audio.h) */  
   	make_sound((uint16_t *)audiobuff, BUFF_LEN_DIV4);
   }
+}
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+    // Conversion Complete & DMA Transfer Complete As Well
+//	setCurrentFrequency(&adcValArray[0]);
 }
 /* USER CODE END 4 */
 
