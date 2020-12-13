@@ -60,30 +60,30 @@ and their implementation should be done in the user code if they are needed.
 Below some examples of callback implementations.
 --------------------------------------------------------*/
 
-/**
- * @brief  Manages the DMA Half Transfer complete interrupt.
- * @param  None
- * @retval None
- */
-void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
-{
-//	BSP_LED_Off(LED_Orange); // stop breathing
-	make_sound((uint16_t *)audiobuff, BUFF_LEN_DIV4);
-//	BSP_LED_On(LED_Orange); // breath again ! (cpu usage indicator)
+// /**
+//  * @brief  Manages the DMA Half Transfer complete interrupt.
+//  * @param  None
+//  * @retval None
+//  */
+// void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
+// {
+// //	BSP_LED_Off(LED_Orange); // stop breathing
+// 	make_sound((uint16_t *)audiobuff, BUFF_LEN_DIV4);
+// //	BSP_LED_On(LED_Orange); // breath again ! (cpu usage indicator)
 
-}
+// }
 
-/**
- * @brief  Manages the DMA transfer complete interrupt.
- * @param  None
- * @retval None
- */
-void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
-{
-//	BSP_LED_Off(LED_Orange);
-	make_sound((uint16_t *)(audiobuff + BUFF_LEN_DIV2), BUFF_LEN_DIV4);
-//	BSP_LED_On(LED_Orange);
-}
+// /**
+//  * @brief  Manages the DMA transfer complete interrupt.
+//  * @param  None
+//  * @retval None
+//  */
+// void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
+// {
+// //	BSP_LED_Off(LED_Orange);
+// 	make_sound((uint16_t *)(audiobuff + BUFF_LEN_DIV2), BUFF_LEN_DIV4);
+// //	BSP_LED_On(LED_Orange);
+// }
 
 /**
  * @brief  Manages the DMA FIFO error interrupt.

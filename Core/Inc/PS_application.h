@@ -1,12 +1,12 @@
 /*
- * MIDI_application.h
+ * PS_application.h
  *
- *  First created on: 6 dec. 2014
- *      Author: Xavier Halgand
+ *  First created on: 13 dec. 2020
+ *      Author: Adam Hammad
  */
 
-#ifndef MIDI_APPLICATION_H_
-#define MIDI_APPLICATION_H_
+#ifndef PS_Application_H_
+#define PS_Application_H_
 
 /* Includes ------------------------------------------------------------------*/
 
@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "PS_interface.h"
 #include "CONSTANTS.h"
 #include "random.h"
 #include "drifter.h"
@@ -26,20 +27,7 @@
 #include "audio_conf.h"
 
 /*------------------------------------------------------------------------------*/
-typedef enum
-{
-	APPLICATION_IDLE = 0,
-	APPLICATION_START,
-	APPLICATION_READY,
-	APPLICATION_RUNNING,
-	APPLICATION_DISCONNECT
-}
-MIDI_ApplicationTypeDef;
 
-/*------------------------------------------------------------------------------*/
-
-//extern USBH_HandleTypeDef hUSBHost;
-extern MIDI_ApplicationTypeDef Appli_state;
 extern int8_t currentNote;
 extern int8_t velocity;
 
@@ -48,7 +36,9 @@ extern int8_t velocity;
 void MagicFX(uint8_t val);
 void MagicPatch(uint8_t val);
 void Reset_notes_On(void);
-void MIDI_Application(void);
 
+void PS_Application(void);
+void Trigger(void);
+void PS_StartPots(void);
 /*------------------------------------------------------------------------------*/
-#endif /* MIDI_APPLICATION_H_ */
+#endif /* PS_Application_H_ */

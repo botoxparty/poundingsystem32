@@ -27,7 +27,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
-static unsigned short pin_state = 0;
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
@@ -247,15 +246,7 @@ void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
   if(__HAL_GPIO_EXTI_GET_FLAG(GPIO_PIN_5)) {
-	  pin_state = !pin_state;
-	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, pin_state);
-    // nextSound();
-//    if(!pin_state) {
-//      HAL_I2S_DMAPause(&hi2s2);
-//    } else {
-//      HAL_I2S_DMAResume(&hi2s2);
-//    }
-
+	 Trigger();
   }
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);

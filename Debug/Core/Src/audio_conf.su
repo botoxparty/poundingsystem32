@@ -1,6 +1,4 @@
 audio_conf.c:41:6:audio_init	0	static
-audio_conf.c:68:6:BSP_AUDIO_OUT_HalfTransfer_CallBack	0	static
-audio_conf.c:81:6:BSP_AUDIO_OUT_TransferComplete_CallBack	0	static
 audio_conf.c:93:6:BSP_AUDIO_OUT_Error_CallBack	0	static
 audio_conf.c:105:6:toggleSound	8	static
 audio_conf.c:120:6:incVol	0	static

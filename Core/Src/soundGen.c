@@ -402,7 +402,7 @@ void Synth_Init(void) {
 	autoSound = 0;
 	chorusON = false;
 	delayON = false;
-	phaserON = false;
+	phaserON = true;
 
 	Delay_init();
 	drifter_init();
@@ -504,8 +504,6 @@ void make_sound(uint16_t *buf, uint16_t length) // To be used with the Sequencer
 
 	outp = buf;
 
-	currentNote = 45;
-
 	for (pos = 0; pos < length; pos++) {
 		/*--- Sequencer actions and update ---*/
 		//sequencer_process(); //computes f0 and calls sequencer_newStep_action() and sequencer_newSequence_action()
@@ -514,7 +512,7 @@ void make_sound(uint16_t *buf, uint16_t length) // To be used with the Sequencer
 			sequencer_process(); //computes f0 and calls sequencer_newStep_action() and sequencer_newSequence_action()
 		} else {
 			f0 = notesFreq[currentNote];
-			vol = (float) 127 / 127.0f;
+			vol = (float) velocity / 127.0f;
 		}
 
 		/*--- compute vibrato modulation ---*/

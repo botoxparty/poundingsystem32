@@ -50,7 +50,8 @@ extern "C" {
 // #include "lis302dl.h"
 
 // #include "usbh_MIDI.h"
-#include "MIDI_application.h"
+#include "wm8731.h"
+#include "PS_application.h"
 #include "timers.h"
 #include "soundGen.h"
 #include "delay.h"
@@ -83,8 +84,6 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-void     Codec_Init(void);
-uint32_t Codec_WriteRegister(uint8_t RegisterAddr, uint16_t RegisterValue);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

@@ -1,4 +1,4 @@
-"Core/Src/MIDI_application.o"
+"Core/Src/PS_application.o"
 "Core/Src/adsr.o"
 "Core/Src/audio_conf.o"
 "Core/Src/blepvco.o"
@@ -22,6 +22,7 @@
 "Core/Src/sysmem.o"
 "Core/Src/system_stm32f4xx.o"
 "Core/Src/timers.o"
+"Core/Src/wm8731.o"
 "Core/Startup/startup_stm32f405rgtx.o"
 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o"

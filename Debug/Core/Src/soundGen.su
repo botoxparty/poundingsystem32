@@ -47,4 +47,4 @@ soundGen.c:397:6:Synth_Init	16	static
 soundGen.c:129:6:Synth_reset	0	static
 soundGen.c:432:6:sequencer_newStep_action	16	static
 soundGen.c:485:6:sequencer_newSequence_action	8	static
-soundGen.c:495:6:make_sound	56	static
+soundGen.c:495:6:make_sound	48	static
