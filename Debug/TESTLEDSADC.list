@@ -29,25 +29,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  00033f4c  2**0
                   CONTENTS, READONLY
- 13 .debug_info   000248aa  00000000  00000000  00033f7c  2**0
+ 13 .debug_info   0002595d  00000000  00000000  00033f7c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_abbrev 00005b98  00000000  00000000  00058826  2**0
+ 14 .debug_abbrev 00005dda  00000000  00000000  000598d9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_loc    0000aeab  00000000  00000000  0005e3be  2**0
+ 15 .debug_loc    0000ae4f  00000000  00000000  0005f6b3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_aranges 000012e0  00000000  00000000  00069270  2**3
+ 16 .debug_aranges 00001300  00000000  00000000  0006a508  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_ranges 000018b0  00000000  00000000  0006a550  2**3
+ 17 .debug_ranges 000018c0  00000000  00000000  0006b808  2**3
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_macro  00025348  00000000  00000000  0006be00  2**0
+ 18 .debug_macro  000257db  00000000  00000000  0006d0c8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .debug_line   0001655e  00000000  00000000  00091148  2**0
+ 19 .debug_line   00017010  00000000  00000000  000928a3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 20 .debug_str    000c3cd7  00000000  00000000  000a76a6  2**0
+ 20 .debug_str    000c3d04  00000000  00000000  000a98b3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 21 .comment      000000f4  00000000  00000000  0016b37d  2**0
+ 21 .comment      000000f4  00000000  00000000  0016d5b7  2**0
                   CONTENTS, READONLY
- 22 .debug_frame  00003a50  00000000  00000000  0016b474  2**2
+ 22 .debug_frame  00003a6c  00000000  00000000  0016d6ac  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1148,478 +1148,482 @@ Disassembly of section .text:
  8000e10:	4770      	bx	lr
  8000e12:	bf00      	nop
 
-08000e14 <Trigger>:
- * @brief  Trigger the sound on
+08000e14 <PS_Application>:
  * @param  None
  * @retval none
  */
-void Trigger(void)
+void PS_Application(void)
 {
- 8000e14:	b510      	push	{r4, lr}
-	if(triggered) {
- 8000e16:	4c0c      	ldr	r4, [pc, #48]	; (8000e48 <Trigger+0x34>)
- 8000e18:	4b0c      	ldr	r3, [pc, #48]	; (8000e4c <Trigger+0x38>)
- 8000e1a:	7822      	ldrb	r2, [r4, #0]
- 8000e1c:	b172      	cbz	r2, 8000e3c <Trigger+0x28>
-		velocity = 0;
- 8000e1e:	2200      	movs	r2, #0
-		ADSR_keyOff(&adsr);
- 8000e20:	480b      	ldr	r0, [pc, #44]	; (8000e50 <Trigger+0x3c>)
-		velocity = 0;
- 8000e22:	701a      	strb	r2, [r3, #0]
-		ADSR_keyOff(&adsr);
- 8000e24:	f000 f9b9 	bl	800119a <ADSR_keyOff>
-	} else {
-		velocity = 127;
-		ADSR_keyOn(&adsr);
-	}
-
-	triggered = !triggered;
- 8000e28:	7822      	ldrb	r2, [r4, #0]
-	HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
- 8000e2a:	480a      	ldr	r0, [pc, #40]	; (8000e54 <Trigger+0x40>)
-	triggered = !triggered;
- 8000e2c:	f082 0201 	eor.w	r2, r2, #1
- 8000e30:	7022      	strb	r2, [r4, #0]
-	HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
- 8000e32:	2110      	movs	r1, #16
-}
- 8000e34:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
-	HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
- 8000e38:	f004 bab2 	b.w	80053a0 <HAL_GPIO_WritePin>
-		velocity = 127;
- 8000e3c:	227f      	movs	r2, #127	; 0x7f
-		ADSR_keyOn(&adsr);
- 8000e3e:	4804      	ldr	r0, [pc, #16]	; (8000e50 <Trigger+0x3c>)
-		velocity = 127;
- 8000e40:	701a      	strb	r2, [r3, #0]
-		ADSR_keyOn(&adsr);
- 8000e42:	f000 f9a1 	bl	8001188 <ADSR_keyOn>
- 8000e46:	e7ef      	b.n	8000e28 <Trigger+0x14>
- 8000e48:	20003f6a 	.word	0x20003f6a
- 8000e4c:	20012a35 	.word	0x20012a35
- 8000e50:	20000080 	.word	0x20000080
- 8000e54:	40020000 	.word	0x40020000
-
-08000e58 <PS_StartPots>:
- * @param  None
- * @retval none
- */
-void PS_StartPots(void)
+	bpm_led_state = !bpm_led_state;
+ 8000e14:	4b0d      	ldr	r3, [pc, #52]	; (8000e4c <PS_Application+0x38>)
 {
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcValArray, 4);
- 8000e58:	2204      	movs	r2, #4
- 8000e5a:	4902      	ldr	r1, [pc, #8]	; (8000e64 <PS_StartPots+0xc>)
- 8000e5c:	4802      	ldr	r0, [pc, #8]	; (8000e68 <PS_StartPots+0x10>)
- 8000e5e:	f003 be5d 	b.w	8004b1c <HAL_ADC_Start_DMA>
- 8000e62:	bf00      	nop
- 8000e64:	20012a2c 	.word	0x20012a2c
- 8000e68:	20013a30 	.word	0x20013a30
-
-08000e6c <map>:
-}
-
-int map(int in, int inMin, int inMax, int outMin, int outMax) {
- 8000e6c:	b530      	push	{r4, r5, lr}
-  // check it's within the range
-  if (inMin<inMax) { 
- 8000e6e:	4291      	cmp	r1, r2
-int map(int in, int inMin, int inMax, int outMin, int outMax) {
- 8000e70:	9d03      	ldr	r5, [sp, #12]
-  if (inMin<inMax) { 
- 8000e72:	da05      	bge.n	8000e80 <map+0x14>
-    if (in <= inMin) 
- 8000e74:	4281      	cmp	r1, r0
- 8000e76:	da1e      	bge.n	8000eb6 <map+0x4a>
-      return outMin;
-    if (in >= inMax)
- 8000e78:	4282      	cmp	r2, r0
- 8000e7a:	dc05      	bgt.n	8000e88 <map+0x1c>
-      return outMax;
- 8000e7c:	462b      	mov	r3, r5
- 8000e7e:	e01a      	b.n	8000eb6 <map+0x4a>
-  } else {  // cope with input range being backwards.
-    if (in >= inMin) 
- 8000e80:	4281      	cmp	r1, r0
- 8000e82:	dd18      	ble.n	8000eb6 <map+0x4a>
-      return outMin;
-    if (in <= inMax)
- 8000e84:	4282      	cmp	r2, r0
- 8000e86:	daf9      	bge.n	8000e7c <map+0x10>
-      return outMax;
-  }
-  // calculate how far into the range we are
-  float scale = (in-inMin)/(inMax-inMin);
-  // calculate the output.
-  return outMin + scale*(outMax-outMin);
- 8000e88:	ee07 3a10 	vmov	s14, r3
- 8000e8c:	1aed      	subs	r5, r5, r3
- 8000e8e:	eef8 6ac7 	vcvt.f32.s32	s13, s14
-  float scale = (in-inMin)/(inMax-inMin);
- 8000e92:	1a44      	subs	r4, r0, r1
- 8000e94:	1a52      	subs	r2, r2, r1
-  return outMin + scale*(outMax-outMin);
- 8000e96:	ee07 5a10 	vmov	s14, r5
-  float scale = (in-inMin)/(inMax-inMin);
- 8000e9a:	fb94 f4f2 	sdiv	r4, r4, r2
- 8000e9e:	ee07 4a90 	vmov	s15, r4
-  return outMin + scale*(outMax-outMin);
- 8000ea2:	eeb8 7ac7 	vcvt.f32.s32	s14, s14
-  float scale = (in-inMin)/(inMax-inMin);
- 8000ea6:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-  return outMin + scale*(outMax-outMin);
- 8000eaa:	eee7 6a87 	vfma.f32	s13, s15, s14
- 8000eae:	eefd 7ae6 	vcvt.s32.f32	s15, s13
- 8000eb2:	ee17 3a90 	vmov	r3, s15
-}
- 8000eb6:	4618      	mov	r0, r3
- 8000eb8:	bd30      	pop	{r4, r5, pc}
-	...
-
-08000ebc <PS_Application>:
+ 8000e16:	b507      	push	{r0, r1, r2, lr}
 	bpm_led_state = !bpm_led_state;
- 8000ebc:	4b0d      	ldr	r3, [pc, #52]	; (8000ef4 <PS_Application+0x38>)
-{
- 8000ebe:	b507      	push	{r0, r1, r2, lr}
-	bpm_led_state = !bpm_led_state;
- 8000ec0:	881a      	ldrh	r2, [r3, #0]
+ 8000e18:	881a      	ldrh	r2, [r3, #0]
 	HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
- 8000ec2:	480d      	ldr	r0, [pc, #52]	; (8000ef8 <PS_Application+0x3c>)
+ 8000e1a:	480d      	ldr	r0, [pc, #52]	; (8000e50 <PS_Application+0x3c>)
 	bpm_led_state = !bpm_led_state;
- 8000ec4:	fab2 f282 	clz	r2, r2
- 8000ec8:	0952      	lsrs	r2, r2, #5
+ 8000e1c:	fab2 f282 	clz	r2, r2
+ 8000e20:	0952      	lsrs	r2, r2, #5
 	HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
- 8000eca:	2104      	movs	r1, #4
+ 8000e22:	2104      	movs	r1, #4
 	bpm_led_state = !bpm_led_state;
- 8000ecc:	801a      	strh	r2, [r3, #0]
+ 8000e24:	801a      	strh	r2, [r3, #0]
 	HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
- 8000ece:	f004 fa67 	bl	80053a0 <HAL_GPIO_WritePin>
+ 8000e26:	f004 fabb 	bl	80053a0 <HAL_GPIO_WritePin>
 	int delay = map((int)adcValArray[0], 0, 4096, 200, 1000);
- 8000ed2:	4b0a      	ldr	r3, [pc, #40]	; (8000efc <PS_Application+0x40>)
- 8000ed4:	8818      	ldrh	r0, [r3, #0]
- 8000ed6:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
- 8000eda:	9300      	str	r3, [sp, #0]
- 8000edc:	f44f 5280 	mov.w	r2, #4096	; 0x1000
- 8000ee0:	23c8      	movs	r3, #200	; 0xc8
- 8000ee2:	2100      	movs	r1, #0
- 8000ee4:	f7ff ffc2 	bl	8000e6c <map>
-}
- 8000ee8:	b003      	add	sp, #12
- 8000eea:	f85d eb04 	ldr.w	lr, [sp], #4
+ 8000e2a:	4b0a      	ldr	r3, [pc, #40]	; (8000e54 <PS_Application+0x40>)
+ 8000e2c:	8818      	ldrh	r0, [r3, #0]
+ 8000e2e:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
+ 8000e32:	9300      	str	r3, [sp, #0]
+ 8000e34:	f44f 5280 	mov.w	r2, #4096	; 0x1000
+ 8000e38:	23c8      	movs	r3, #200	; 0xc8
+ 8000e3a:	2100      	movs	r1, #0
+ 8000e3c:	f000 f95c 	bl	80010f8 <map>
 	HAL_Delay(delay);
- 8000eee:	f003 bd5b 	b.w	80049a8 <HAL_Delay>
- 8000ef2:	bf00      	nop
- 8000ef4:	20003f68 	.word	0x20003f68
- 8000ef8:	40020000 	.word	0x40020000
- 8000efc:	20012a2c 	.word	0x20012a2c
-
-08000f00 <HAL_ADC_ConvCpltCallback>:
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
-{
-	uint16_t read = &adcValArray;
-	int16_t note = (short) &adcValArray[1];
-	// Conversion Complete & DMA Transfer Complete As Well
-	currentNote = (int) &adcValArray[0] / 8;
- 8000f00:	4a03      	ldr	r2, [pc, #12]	; (8000f10 <HAL_ADC_ConvCpltCallback+0x10>)
- 8000f02:	4b04      	ldr	r3, [pc, #16]	; (8000f14 <HAL_ADC_ConvCpltCallback+0x14>)
- 8000f04:	2108      	movs	r1, #8
- 8000f06:	fb93 f3f1 	sdiv	r3, r3, r1
- 8000f0a:	7013      	strb	r3, [r2, #0]
 }
- 8000f0c:	4770      	bx	lr
- 8000f0e:	bf00      	nop
- 8000f10:	20012a34 	.word	0x20012a34
- 8000f14:	20012a2c 	.word	0x20012a2c
+ 8000e40:	b003      	add	sp, #12
+ 8000e42:	f85d eb04 	ldr.w	lr, [sp], #4
+	HAL_Delay(delay);
+ 8000e46:	f003 bdaf 	b.w	80049a8 <HAL_Delay>
+ 8000e4a:	bf00      	nop
+ 8000e4c:	20003f68 	.word	0x20003f68
+ 8000e50:	40020000 	.word	0x40020000
+ 8000e54:	20012a2c 	.word	0x20012a2c
 
-08000f18 <MagicFX>:
+08000e58 <MagicFX>:
 
 /*-----------------------------------------------------------------------------*/
 void MagicFX(uint8_t val) /* random effects parameters */
 {
 	if (val == MIDI_MAXi)
- 8000f18:	287f      	cmp	r0, #127	; 0x7f
+ 8000e58:	287f      	cmp	r0, #127	; 0x7f
 {
- 8000f1a:	b510      	push	{r4, lr}
- 8000f1c:	4604      	mov	r4, r0
+ 8000e5a:	b510      	push	{r4, lr}
+ 8000e5c:	4604      	mov	r4, r0
 	if (val == MIDI_MAXi)
- 8000f1e:	d13d      	bne.n	8000f9c <MagicFX+0x84>
+ 8000e5e:	d13d      	bne.n	8000edc <MagicFX+0x84>
 	{
 		Delay_switch(MIDI_MAXi);
- 8000f20:	f002 ffb6 	bl	8003e90 <Delay_switch>
+ 8000e60:	f003 f816 	bl	8003e90 <Delay_switch>
 		Delay_time_set(MIDIrandVal());
- 8000f24:	f002 fbde 	bl	80036e4 <MIDIrandVal>
- 8000f28:	f001 fa32 	bl	8002390 <Delay_time_set>
+ 8000e64:	f002 fc3e 	bl	80036e4 <MIDIrandVal>
+ 8000e68:	f001 fa92 	bl	8002390 <Delay_time_set>
 		DelayWet_set(MIDIrandVal());
- 8000f2c:	f002 fbda 	bl	80036e4 <MIDIrandVal>
- 8000f30:	f001 fa68 	bl	8002404 <DelayWet_set>
+ 8000e6c:	f002 fc3a 	bl	80036e4 <MIDIrandVal>
+ 8000e70:	f001 fac8 	bl	8002404 <DelayWet_set>
 		DelayFeedback_set(MIDIrandVal());
- 8000f34:	f002 fbd6 	bl	80036e4 <MIDIrandVal>
- 8000f38:	f001 fa54 	bl	80023e4 <DelayFeedback_set>
+ 8000e74:	f002 fc36 	bl	80036e4 <MIDIrandVal>
+ 8000e78:	f001 fab4 	bl	80023e4 <DelayFeedback_set>
 
 		Chorus_switch(MIDI_MAXi);
- 8000f3c:	4620      	mov	r0, r4
- 8000f3e:	f002 ffbd 	bl	8003ebc <Chorus_switch>
+ 8000e7c:	4620      	mov	r0, r4
+ 8000e7e:	f003 f81d 	bl	8003ebc <Chorus_switch>
 		ChorusRate_set(MIDIrandVal());
- 8000f42:	f002 fbcf 	bl	80036e4 <MIDIrandVal>
- 8000f46:	f001 f849 	bl	8001fdc <ChorusRate_set>
+ 8000e82:	f002 fc2f 	bl	80036e4 <MIDIrandVal>
+ 8000e86:	f001 f8a9 	bl	8001fdc <ChorusRate_set>
 		ChorusSecondRate_set(MIDIrandVal());
- 8000f4a:	f002 fbcb 	bl	80036e4 <MIDIrandVal>
- 8000f4e:	f001 f863 	bl	8002018 <ChorusSecondRate_set>
+ 8000e8a:	f002 fc2b 	bl	80036e4 <MIDIrandVal>
+ 8000e8e:	f001 f8c3 	bl	8002018 <ChorusSecondRate_set>
 		ChorusDelay_set(MIDIrandVal());
- 8000f52:	f002 fbc7 	bl	80036e4 <MIDIrandVal>
- 8000f56:	f001 f87d 	bl	8002054 <ChorusDelay_set>
+ 8000e92:	f002 fc27 	bl	80036e4 <MIDIrandVal>
+ 8000e96:	f001 f8dd 	bl	8002054 <ChorusDelay_set>
 		ChorusSweep_set(MIDIrandVal());
- 8000f5a:	f002 fbc3 	bl	80036e4 <MIDIrandVal>
- 8000f5e:	f001 f8ab 	bl	80020b8 <ChorusSweep_set>
+ 8000e9a:	f002 fc23 	bl	80036e4 <MIDIrandVal>
+ 8000e9e:	f001 f90b 	bl	80020b8 <ChorusSweep_set>
 		ChorusFeedback_set(MIDIrandVal());
- 8000f62:	f002 fbbf 	bl	80036e4 <MIDIrandVal>
- 8000f66:	f001 f88b 	bl	8002080 <ChorusFeedback_set>
+ 8000ea2:	f002 fc1f 	bl	80036e4 <MIDIrandVal>
+ 8000ea6:	f001 f8eb 	bl	8002080 <ChorusFeedback_set>
 		ChorusMode_switch(MIDIrandVal());
- 8000f6a:	f002 fbbb 	bl	80036e4 <MIDIrandVal>
- 8000f6e:	f001 f8b5 	bl	80020dc <ChorusMode_switch>
+ 8000eaa:	f002 fc1b 	bl	80036e4 <MIDIrandVal>
+ 8000eae:	f001 f915 	bl	80020dc <ChorusMode_switch>
 		ChorusFDBsign_switch(MIDIrandVal());
- 8000f72:	f002 fbb7 	bl	80036e4 <MIDIrandVal>
- 8000f76:	f001 f8c5 	bl	8002104 <ChorusFDBsign_switch>
+ 8000eb2:	f002 fc17 	bl	80036e4 <MIDIrandVal>
+ 8000eb6:	f001 f925 	bl	8002104 <ChorusFDBsign_switch>
 
 		Phaser_switch(MIDI_MAXi);
- 8000f7a:	4620      	mov	r0, r4
- 8000f7c:	f002 ffa8 	bl	8003ed0 <Phaser_switch>
+ 8000eba:	4620      	mov	r0, r4
+ 8000ebc:	f003 f808 	bl	8003ed0 <Phaser_switch>
 		Phaser_Rate_set(MIDIrandVal());
- 8000f80:	f002 fbb0 	bl	80036e4 <MIDIrandVal>
- 8000f84:	f002 faca 	bl	800351c <Phaser_Rate_set>
+ 8000ec0:	f002 fc10 	bl	80036e4 <MIDIrandVal>
+ 8000ec4:	f002 fb2a 	bl	800351c <Phaser_Rate_set>
 		Phaser_Feedback_set(MIDIrandVal());
- 8000f88:	f002 fbac 	bl	80036e4 <MIDIrandVal>
- 8000f8c:	f002 fae6 	bl	800355c <Phaser_Feedback_set>
+ 8000ec8:	f002 fc0c 	bl	80036e4 <MIDIrandVal>
+ 8000ecc:	f002 fb46 	bl	800355c <Phaser_Feedback_set>
 		Phaser_Wet_set(MIDIrandVal());
- 8000f90:	f002 fba8 	bl	80036e4 <MIDIrandVal>
+ 8000ed0:	f002 fc08 	bl	80036e4 <MIDIrandVal>
 	}
 }
- 8000f94:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+ 8000ed4:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
 		Phaser_Wet_set(MIDIrandVal());
- 8000f98:	f002 baf6 	b.w	8003588 <Phaser_Wet_set>
+ 8000ed8:	f002 bb56 	b.w	8003588 <Phaser_Wet_set>
 }
- 8000f9c:	bd10      	pop	{r4, pc}
+ 8000edc:	bd10      	pop	{r4, pc}
 	...
 
-08000fa0 <MagicPatch>:
+08000ee0 <MagicPatch>:
 /*-----------------------------------------------------------------------------*/
 void MagicPatch(uint8_t val) /* random sound parameters */
 {
 	if (val == MIDI_MAXi)
- 8000fa0:	287f      	cmp	r0, #127	; 0x7f
+ 8000ee0:	287f      	cmp	r0, #127	; 0x7f
 {
- 8000fa2:	b508      	push	{r3, lr}
+ 8000ee2:	b508      	push	{r3, lr}
 	if (val == MIDI_MAXi)
- 8000fa4:	f040 80bb 	bne.w	800111e <MagicPatch+0x17e>
+ 8000ee4:	f040 80bb 	bne.w	800105e <MagicPatch+0x17e>
 	{
 		seq_tempo_set(MIDIrandVal());
- 8000fa8:	f002 fb9c 	bl	80036e4 <MIDIrandVal>
- 8000fac:	f002 fd8e 	bl	8003acc <seq_tempo_set>
+ 8000ee8:	f002 fbfc 	bl	80036e4 <MIDIrandVal>
+ 8000eec:	f002 fdee 	bl	8003acc <seq_tempo_set>
 		seq_freqMax_set(MIDIrandVal());
- 8000fb0:	f002 fb98 	bl	80036e4 <MIDIrandVal>
- 8000fb4:	f002 fe1c 	bl	8003bf0 <seq_freqMax_set>
+ 8000ef0:	f002 fbf8 	bl	80036e4 <MIDIrandVal>
+ 8000ef4:	f002 fe7c 	bl	8003bf0 <seq_freqMax_set>
 		seq_scale_set(MIDIrandVal());
- 8000fb8:	f002 fb94 	bl	80036e4 <MIDIrandVal>
- 8000fbc:	f002 fde2 	bl	8003b84 <seq_scale_set>
+ 8000ef8:	f002 fbf4 	bl	80036e4 <MIDIrandVal>
+ 8000efc:	f002 fe42 	bl	8003b84 <seq_scale_set>
 		seq_switchMovingSeq(MIDIrandVal());
- 8000fc0:	f002 fb90 	bl	80036e4 <MIDIrandVal>
- 8000fc4:	f002 fdfc 	bl	8003bc0 <seq_switchMovingSeq>
+ 8000f00:	f002 fbf0 	bl	80036e4 <MIDIrandVal>
+ 8000f04:	f002 fe5c 	bl	8003bc0 <seq_switchMovingSeq>
 		seq_switchMute(MIDIrandVal());
- 8000fc8:	f002 fb8c 	bl	80036e4 <MIDIrandVal>
- 8000fcc:	f002 fe02 	bl	8003bd4 <seq_switchMute>
+ 8000f08:	f002 fbec 	bl	80036e4 <MIDIrandVal>
+ 8000f0c:	f002 fe62 	bl	8003bd4 <seq_switchMute>
 		seq_gateTime_set(MIDIrandVal());
- 8000fd0:	f002 fb88 	bl	80036e4 <MIDIrandVal>
- 8000fd4:	f002 fd9e 	bl	8003b14 <seq_gateTime_set>
+ 8000f10:	f002 fbe8 	bl	80036e4 <MIDIrandVal>
+ 8000f14:	f002 fdfe 	bl	8003b14 <seq_gateTime_set>
 		autoSound_set(rand() % 3);
- 8000fd8:	f005 fb50 	bl	800667c <rand>
- 8000fdc:	2303      	movs	r3, #3
- 8000fde:	fb90 f3f3 	sdiv	r3, r0, r3
- 8000fe2:	eb03 0343 	add.w	r3, r3, r3, lsl #1
- 8000fe6:	1ac0      	subs	r0, r0, r3
- 8000fe8:	b240      	sxtb	r0, r0
- 8000fea:	f002 fec5 	bl	8003d78 <autoSound_set>
+ 8000f18:	f005 fbb0 	bl	800667c <rand>
+ 8000f1c:	2303      	movs	r3, #3
+ 8000f1e:	fb90 f3f3 	sdiv	r3, r0, r3
+ 8000f22:	eb03 0343 	add.w	r3, r3, r3, lsl #1
+ 8000f26:	1ac0      	subs	r0, r0, r3
+ 8000f28:	b240      	sxtb	r0, r0
+ 8000f2a:	f002 ff25 	bl	8003d78 <autoSound_set>
 		Sound_set(MIDIrandVal());
- 8000fee:	f002 fb79 	bl	80036e4 <MIDIrandVal>
- 8000ff2:	f002 ff77 	bl	8003ee4 <Sound_set>
+ 8000f2e:	f002 fbd9 	bl	80036e4 <MIDIrandVal>
+ 8000f32:	f002 ffd7 	bl	8003ee4 <Sound_set>
 		uint8_t snd = soundNumber_get();
- 8000ff6:	f002 fec5 	bl	8003d84 <soundNumber_get>
+ 8000f36:	f002 ff25 	bl	8003d84 <soundNumber_get>
 
 		if (snd == FM2)
- 8000ffa:	280e      	cmp	r0, #14
- 8000ffc:	d17c      	bne.n	80010f8 <MagicPatch+0x158>
+ 8000f3a:	280e      	cmp	r0, #14
+ 8000f3c:	d17c      	bne.n	8001038 <MagicPatch+0x158>
 		{
 			FM_OP1_freq_set(MIDIrandVal());
- 8000ffe:	f002 fb71 	bl	80036e4 <MIDIrandVal>
- 8001002:	f002 ff91 	bl	8003f28 <FM_OP1_freq_set>
+ 8000f3e:	f002 fbd1 	bl	80036e4 <MIDIrandVal>
+ 8000f42:	f002 fff1 	bl	8003f28 <FM_OP1_freq_set>
 			FM_OP1_modInd_set(MIDIrandVal());
- 8001006:	f002 fb6d 	bl	80036e4 <MIDIrandVal>
- 800100a:	f002 ff93 	bl	8003f34 <FM_OP1_modInd_set>
+ 8000f46:	f002 fbcd 	bl	80036e4 <MIDIrandVal>
+ 8000f4a:	f002 fff3 	bl	8003f34 <FM_OP1_modInd_set>
 			FM_OP2_freq_set(MIDIrandVal());
- 800100e:	f002 fb69 	bl	80036e4 <MIDIrandVal>
- 8001012:	f002 ff95 	bl	8003f40 <FM_OP2_freq_set>
+ 8000f4e:	f002 fbc9 	bl	80036e4 <MIDIrandVal>
+ 8000f52:	f002 fff5 	bl	8003f40 <FM_OP2_freq_set>
 			FM_OP2_modInd_set(MIDIrandVal());
- 8001016:	f002 fb65 	bl	80036e4 <MIDIrandVal>
- 800101a:	f002 ffa3 	bl	8003f64 <FM_OP2_modInd_set>
+ 8000f56:	f002 fbc5 	bl	80036e4 <MIDIrandVal>
+ 8000f5a:	f003 f803 	bl	8003f64 <FM_OP2_modInd_set>
 			FM_OP3_freq_set(MIDIrandVal());
- 800101e:	f002 fb61 	bl	80036e4 <MIDIrandVal>
- 8001022:	f002 ffa5 	bl	8003f70 <FM_OP3_freq_set>
+ 8000f5e:	f002 fbc1 	bl	80036e4 <MIDIrandVal>
+ 8000f62:	f003 f805 	bl	8003f70 <FM_OP3_freq_set>
 			FM_OP3_modInd_set(MIDIrandVal());
- 8001026:	f002 fb5d 	bl	80036e4 <MIDIrandVal>
- 800102a:	f002 ffb3 	bl	8003f94 <FM_OP3_modInd_set>
+ 8000f66:	f002 fbbd 	bl	80036e4 <MIDIrandVal>
+ 8000f6a:	f003 f813 	bl	8003f94 <FM_OP3_modInd_set>
 			FM_OP4_freq_set(MIDIrandVal());
- 800102e:	f002 fb59 	bl	80036e4 <MIDIrandVal>
- 8001032:	f002 ffb5 	bl	8003fa0 <FM_OP4_freq_set>
+ 8000f6e:	f002 fbb9 	bl	80036e4 <MIDIrandVal>
+ 8000f72:	f003 f815 	bl	8003fa0 <FM_OP4_freq_set>
 			FM_OP4_modInd_set(MIDIrandVal());
- 8001036:	f002 fb55 	bl	80036e4 <MIDIrandVal>
- 800103a:	f002 ffc3 	bl	8003fc4 <FM_OP4_modInd_set>
+ 8000f76:	f002 fbb5 	bl	80036e4 <MIDIrandVal>
+ 8000f7a:	f003 f823 	bl	8003fc4 <FM_OP4_modInd_set>
 			Drifter_minFreq_set(MIDIrandVal());
 			Drifter_maxFreq_set(MIDIrandVal());
 			Drifter_centralFreq_set(MIDIrandVal());
 		}
 
 		Filter1Freq_set(MIDIrandVal());
- 800103e:	f002 fb51 	bl	80036e4 <MIDIrandVal>
- 8001042:	f002 fbdd 	bl	8003800 <Filter1Freq_set>
+ 8000f7e:	f002 fbb1 	bl	80036e4 <MIDIrandVal>
+ 8000f82:	f002 fc3d 	bl	8003800 <Filter1Freq_set>
 		Filter1Res_set(MIDIrandVal());
- 8001046:	f002 fb4d 	bl	80036e4 <MIDIrandVal>
- 800104a:	f002 fbf7 	bl	800383c <Filter1Res_set>
+ 8000f86:	f002 fbad 	bl	80036e4 <MIDIrandVal>
+ 8000f8a:	f002 fc57 	bl	800383c <Filter1Res_set>
 		Filter1Drive_set(MIDIrandVal());
- 800104e:	f002 fb49 	bl	80036e4 <MIDIrandVal>
- 8001052:	f002 fc03 	bl	800385c <Filter1Drive_set>
+ 8000f8e:	f002 fba9 	bl	80036e4 <MIDIrandVal>
+ 8000f92:	f002 fc63 	bl	800385c <Filter1Drive_set>
 		Filter1Type_set(MIDIrandVal());
- 8001056:	f002 fb45 	bl	80036e4 <MIDIrandVal>
- 800105a:	f002 fc05 	bl	8003868 <Filter1Type_set>
+ 8000f96:	f002 fba5 	bl	80036e4 <MIDIrandVal>
+ 8000f9a:	f002 fc65 	bl	8003868 <Filter1Type_set>
 		Filt1LFO_amp_set(MIDIrandVal());
- 800105e:	f002 fb41 	bl	80036e4 <MIDIrandVal>
- 8001062:	f002 feb5 	bl	8003dd0 <Filt1LFO_amp_set>
+ 8000f9e:	f002 fba1 	bl	80036e4 <MIDIrandVal>
+ 8000fa2:	f002 ff15 	bl	8003dd0 <Filt1LFO_amp_set>
 		Filt1LFO_freq_set(MIDIrandVal());
- 8001066:	f002 fb3d 	bl	80036e4 <MIDIrandVal>
- 800106a:	f002 fec1 	bl	8003df0 <Filt1LFO_freq_set>
+ 8000fa6:	f002 fb9d 	bl	80036e4 <MIDIrandVal>
+ 8000faa:	f002 ff21 	bl	8003df0 <Filt1LFO_freq_set>
 
 		Filter2Freq_set(MIDIrandVal());
- 800106e:	f002 fb39 	bl	80036e4 <MIDIrandVal>
- 8001072:	f002 fc0d 	bl	8003890 <Filter2Freq_set>
+ 8000fae:	f002 fb99 	bl	80036e4 <MIDIrandVal>
+ 8000fb2:	f002 fc6d 	bl	8003890 <Filter2Freq_set>
 		Filter2Res_set(MIDIrandVal());
- 8001076:	f002 fb35 	bl	80036e4 <MIDIrandVal>
- 800107a:	f002 fc27 	bl	80038cc <Filter2Res_set>
+ 8000fb6:	f002 fb95 	bl	80036e4 <MIDIrandVal>
+ 8000fba:	f002 fc87 	bl	80038cc <Filter2Res_set>
 		Filter2Drive_set(MIDIrandVal());
- 800107e:	f002 fb31 	bl	80036e4 <MIDIrandVal>
- 8001082:	f002 fc33 	bl	80038ec <Filter2Drive_set>
+ 8000fbe:	f002 fb91 	bl	80036e4 <MIDIrandVal>
+ 8000fc2:	f002 fc93 	bl	80038ec <Filter2Drive_set>
 		Filter2Type_set(MIDIrandVal());
- 8001086:	f002 fb2d 	bl	80036e4 <MIDIrandVal>
- 800108a:	f002 fc35 	bl	80038f8 <Filter2Type_set>
+ 8000fc6:	f002 fb8d 	bl	80036e4 <MIDIrandVal>
+ 8000fca:	f002 fc95 	bl	80038f8 <Filter2Type_set>
 		Filt2LFO_amp_set(MIDIrandVal());
- 800108e:	f002 fb29 	bl	80036e4 <MIDIrandVal>
- 8001092:	f002 febd 	bl	8003e10 <Filt2LFO_amp_set>
+ 8000fce:	f002 fb89 	bl	80036e4 <MIDIrandVal>
+ 8000fd2:	f002 ff1d 	bl	8003e10 <Filt2LFO_amp_set>
 		Filt2LFO_freq_set(MIDIrandVal());
- 8001096:	f002 fb25 	bl	80036e4 <MIDIrandVal>
- 800109a:	f002 fec9 	bl	8003e30 <Filt2LFO_freq_set>
+ 8000fd6:	f002 fb85 	bl	80036e4 <MIDIrandVal>
+ 8000fda:	f002 ff29 	bl	8003e30 <Filt2LFO_freq_set>
 
 		Filter_Random_switch(MIDIrandVal());
- 800109e:	f002 fb21 	bl	80036e4 <MIDIrandVal>
- 80010a2:	f002 ff01 	bl	8003ea8 <Filter_Random_switch>
+ 8000fde:	f002 fb81 	bl	80036e4 <MIDIrandVal>
+ 8000fe2:	f002 ff61 	bl	8003ea8 <Filter_Random_switch>
 
 		AttTime_set((uint8_t)lrintf(frand_a_b(0, MIDI_MAX / 10)));
- 80010a6:	eddf 0a1e 	vldr	s1, [pc, #120]	; 8001120 <MagicPatch+0x180>
- 80010aa:	ed9f 0a1e 	vldr	s0, [pc, #120]	; 8001124 <MagicPatch+0x184>
- 80010ae:	f002 fb03 	bl	80036b8 <frand_a_b>
- 80010b2:	f005 fbcd 	bl	8006850 <lrintf>
- 80010b6:	b2c0      	uxtb	r0, r0
- 80010b8:	f000 f878 	bl	80011ac <AttTime_set>
+ 8000fe6:	eddf 0a1e 	vldr	s1, [pc, #120]	; 8001060 <MagicPatch+0x180>
+ 8000fea:	ed9f 0a1e 	vldr	s0, [pc, #120]	; 8001064 <MagicPatch+0x184>
+ 8000fee:	f002 fb63 	bl	80036b8 <frand_a_b>
+ 8000ff2:	f005 fc2d 	bl	8006850 <lrintf>
+ 8000ff6:	b2c0      	uxtb	r0, r0
+ 8000ff8:	f000 f8d8 	bl	80011ac <AttTime_set>
 		DecTime_set(MIDIrandVal());
- 80010bc:	f002 fb12 	bl	80036e4 <MIDIrandVal>
- 80010c0:	f000 f896 	bl	80011f0 <DecTime_set>
+ 8000ffc:	f002 fb72 	bl	80036e4 <MIDIrandVal>
+ 8001000:	f000 f8f6 	bl	80011f0 <DecTime_set>
 		SustLevel_set(MIDIrandVal());
- 80010c4:	f002 fb0e 	bl	80036e4 <MIDIrandVal>
- 80010c8:	f000 f8c6 	bl	8001258 <SustLevel_set>
+ 8001004:	f002 fb6e 	bl	80036e4 <MIDIrandVal>
+ 8001008:	f000 f926 	bl	8001258 <SustLevel_set>
 		RelTime_set(MIDIrandVal());
- 80010cc:	f002 fb0a 	bl	80036e4 <MIDIrandVal>
- 80010d0:	f000 f8d2 	bl	8001278 <RelTime_set>
+ 800100c:	f002 fb6a 	bl	80036e4 <MIDIrandVal>
+ 8001010:	f000 f932 	bl	8001278 <RelTime_set>
 
 		VibratoAmp_set(MIDIrandVal());
- 80010d4:	f002 fb06 	bl	80036e4 <MIDIrandVal>
- 80010d8:	f002 feba 	bl	8003e50 <VibratoAmp_set>
+ 8001014:	f002 fb66 	bl	80036e4 <MIDIrandVal>
+ 8001018:	f002 ff1a 	bl	8003e50 <VibratoAmp_set>
 		VibratoFreq_set(MIDIrandVal());
- 80010dc:	f002 fb02 	bl	80036e4 <MIDIrandVal>
- 80010e0:	f002 fec6 	bl	8003e70 <VibratoFreq_set>
+ 800101c:	f002 fb62 	bl	80036e4 <MIDIrandVal>
+ 8001020:	f002 ff26 	bl	8003e70 <VibratoFreq_set>
 
 		AmpLFO_amp_set(MIDIrandVal());
- 80010e4:	f002 fafe 	bl	80036e4 <MIDIrandVal>
- 80010e8:	f002 fe52 	bl	8003d90 <AmpLFO_amp_set>
+ 8001024:	f002 fb5e 	bl	80036e4 <MIDIrandVal>
+ 8001028:	f002 feb2 	bl	8003d90 <AmpLFO_amp_set>
 		AmpLFO_freq_set(MIDIrandVal());
- 80010ec:	f002 fafa 	bl	80036e4 <MIDIrandVal>
+ 800102c:	f002 fb5a 	bl	80036e4 <MIDIrandVal>
 	}
 }
- 80010f0:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+ 8001030:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
 		AmpLFO_freq_set(MIDIrandVal());
- 80010f4:	f002 be5c 	b.w	8003db0 <AmpLFO_freq_set>
+ 8001034:	f002 bebc 	b.w	8003db0 <AmpLFO_freq_set>
 		else if (snd == DRIFTERS)
- 80010f8:	280d      	cmp	r0, #13
- 80010fa:	d1a0      	bne.n	800103e <MagicPatch+0x9e>
+ 8001038:	280d      	cmp	r0, #13
+ 800103a:	d1a0      	bne.n	8000f7e <MagicPatch+0x9e>
 			Drifter_amp_set(MIDIrandVal());
- 80010fc:	f002 faf2 	bl	80036e4 <MIDIrandVal>
- 8001100:	f001 f9ec 	bl	80024dc <Drifter_amp_set>
+ 800103c:	f002 fb52 	bl	80036e4 <MIDIrandVal>
+ 8001040:	f001 fa4c 	bl	80024dc <Drifter_amp_set>
 			Drifter_minFreq_set(MIDIrandVal());
- 8001104:	f002 faee 	bl	80036e4 <MIDIrandVal>
- 8001108:	f001 f9fe 	bl	8002508 <Drifter_minFreq_set>
+ 8001044:	f002 fb4e 	bl	80036e4 <MIDIrandVal>
+ 8001048:	f001 fa5e 	bl	8002508 <Drifter_minFreq_set>
 			Drifter_maxFreq_set(MIDIrandVal());
- 800110c:	f002 faea 	bl	80036e4 <MIDIrandVal>
- 8001110:	f001 fa16 	bl	8002540 <Drifter_maxFreq_set>
+ 800104c:	f002 fb4a 	bl	80036e4 <MIDIrandVal>
+ 8001050:	f001 fa76 	bl	8002540 <Drifter_maxFreq_set>
 			Drifter_centralFreq_set(MIDIrandVal());
- 8001114:	f002 fae6 	bl	80036e4 <MIDIrandVal>
- 8001118:	f001 fcea 	bl	8002af0 <Drifter_centralFreq_set>
- 800111c:	e78f      	b.n	800103e <MagicPatch+0x9e>
+ 8001054:	f002 fb46 	bl	80036e4 <MIDIrandVal>
+ 8001058:	f001 fd4a 	bl	8002af0 <Drifter_centralFreq_set>
+ 800105c:	e78f      	b.n	8000f7e <MagicPatch+0x9e>
 }
- 800111e:	bd08      	pop	{r3, pc}
- 8001120:	414b3333 	.word	0x414b3333
- 8001124:	00000000 	.word	0x00000000
+ 800105e:	bd08      	pop	{r3, pc}
+ 8001060:	414b3333 	.word	0x414b3333
+ 8001064:	00000000 	.word	0x00000000
 
-08001128 <HAL_I2S_TxCpltCallback>:
+08001068 <HAL_I2S_TxCpltCallback>:
   * @param  hi2s: I2S handle
   * @retval None
   */
 void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
 {
   if(hi2s->Instance == SPI2)
- 8001128:	6802      	ldr	r2, [r0, #0]
- 800112a:	4b04      	ldr	r3, [pc, #16]	; (800113c <HAL_I2S_TxCpltCallback+0x14>)
- 800112c:	429a      	cmp	r2, r3
- 800112e:	d104      	bne.n	800113a <HAL_I2S_TxCpltCallback+0x12>
+ 8001068:	6802      	ldr	r2, [r0, #0]
+ 800106a:	4b04      	ldr	r3, [pc, #16]	; (800107c <HAL_I2S_TxCpltCallback+0x14>)
+ 800106c:	429a      	cmp	r2, r3
+ 800106e:	d104      	bne.n	800107a <HAL_I2S_TxCpltCallback+0x12>
   {
     /* Call the user function which will manage directly transfer complete */
 	  make_sound((uint16_t *)(audiobuff + BUFF_LEN_DIV2), BUFF_LEN_DIV4);
- 8001130:	f44f 71fa 	mov.w	r1, #500	; 0x1f4
- 8001134:	4802      	ldr	r0, [pc, #8]	; (8001140 <HAL_I2S_TxCpltCallback+0x18>)
- 8001136:	f003 b897 	b.w	8004268 <make_sound>
+ 8001070:	f44f 71fa 	mov.w	r1, #500	; 0x1f4
+ 8001074:	4802      	ldr	r0, [pc, #8]	; (8001080 <HAL_I2S_TxCpltCallback+0x18>)
+ 8001076:	f003 b8f7 	b.w	8004268 <make_sound>
   }
 }
- 800113a:	4770      	bx	lr
- 800113c:	40003800 	.word	0x40003800
- 8001140:	20013206 	.word	0x20013206
+ 800107a:	4770      	bx	lr
+ 800107c:	40003800 	.word	0x40003800
+ 8001080:	20013206 	.word	0x20013206
 
-08001144 <HAL_I2S_TxHalfCpltCallback>:
+08001084 <HAL_I2S_TxHalfCpltCallback>:
   * @param  hi2s: I2S handle
   * @retval None
   */
 void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
   if(hi2s->Instance == SPI2)
- 8001144:	6802      	ldr	r2, [r0, #0]
- 8001146:	4b04      	ldr	r3, [pc, #16]	; (8001158 <HAL_I2S_TxHalfCpltCallback+0x14>)
- 8001148:	429a      	cmp	r2, r3
- 800114a:	d104      	bne.n	8001156 <HAL_I2S_TxHalfCpltCallback+0x12>
+ 8001084:	6802      	ldr	r2, [r0, #0]
+ 8001086:	4b04      	ldr	r3, [pc, #16]	; (8001098 <HAL_I2S_TxHalfCpltCallback+0x14>)
+ 8001088:	429a      	cmp	r2, r3
+ 800108a:	d104      	bne.n	8001096 <HAL_I2S_TxHalfCpltCallback+0x12>
   {
     /* Manage the remaining file size and new address offset: This function should
        be coded by user (its prototype is already declared in stm32f4_discovery_audio.h) */  
   	make_sound((uint16_t *)audiobuff, BUFF_LEN_DIV4);
- 800114c:	f44f 71fa 	mov.w	r1, #500	; 0x1f4
- 8001150:	4802      	ldr	r0, [pc, #8]	; (800115c <HAL_I2S_TxHalfCpltCallback+0x18>)
- 8001152:	f003 b889 	b.w	8004268 <make_sound>
+ 800108c:	f44f 71fa 	mov.w	r1, #500	; 0x1f4
+ 8001090:	4802      	ldr	r0, [pc, #8]	; (800109c <HAL_I2S_TxHalfCpltCallback+0x18>)
+ 8001092:	f003 b8e9 	b.w	8004268 <make_sound>
   }
 }
- 8001156:	4770      	bx	lr
- 8001158:	40003800 	.word	0x40003800
- 800115c:	20012a36 	.word	0x20012a36
+ 8001096:	4770      	bx	lr
+ 8001098:	40003800 	.word	0x40003800
+ 800109c:	20012a36 	.word	0x20012a36
+
+080010a0 <Trigger>:
+ * @brief  Trigger the sound on
+ * @param  None
+ * @retval none
+ */
+void Trigger(void)
+{
+ 80010a0:	b510      	push	{r4, lr}
+	if(triggered) {
+ 80010a2:	4c0c      	ldr	r4, [pc, #48]	; (80010d4 <Trigger+0x34>)
+ 80010a4:	4b0c      	ldr	r3, [pc, #48]	; (80010d8 <Trigger+0x38>)
+ 80010a6:	7822      	ldrb	r2, [r4, #0]
+ 80010a8:	b172      	cbz	r2, 80010c8 <Trigger+0x28>
+		velocity = 0;
+ 80010aa:	2200      	movs	r2, #0
+		ADSR_keyOff(&adsr);
+ 80010ac:	480b      	ldr	r0, [pc, #44]	; (80010dc <Trigger+0x3c>)
+		velocity = 0;
+ 80010ae:	701a      	strb	r2, [r3, #0]
+		ADSR_keyOff(&adsr);
+ 80010b0:	f000 f873 	bl	800119a <ADSR_keyOff>
+	} else {
+		velocity = 127;
+		ADSR_keyOn(&adsr);
+	}
+
+	triggered = !triggered;
+ 80010b4:	7822      	ldrb	r2, [r4, #0]
+	HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
+ 80010b6:	480a      	ldr	r0, [pc, #40]	; (80010e0 <Trigger+0x40>)
+	triggered = !triggered;
+ 80010b8:	f082 0201 	eor.w	r2, r2, #1
+ 80010bc:	7022      	strb	r2, [r4, #0]
+	HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
+ 80010be:	2110      	movs	r1, #16
+}
+ 80010c0:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+	HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
+ 80010c4:	f004 b96c 	b.w	80053a0 <HAL_GPIO_WritePin>
+		velocity = 127;
+ 80010c8:	227f      	movs	r2, #127	; 0x7f
+		ADSR_keyOn(&adsr);
+ 80010ca:	4804      	ldr	r0, [pc, #16]	; (80010dc <Trigger+0x3c>)
+		velocity = 127;
+ 80010cc:	701a      	strb	r2, [r3, #0]
+		ADSR_keyOn(&adsr);
+ 80010ce:	f000 f85b 	bl	8001188 <ADSR_keyOn>
+ 80010d2:	e7ef      	b.n	80010b4 <Trigger+0x14>
+ 80010d4:	20003f6a 	.word	0x20003f6a
+ 80010d8:	20012a35 	.word	0x20012a35
+ 80010dc:	20000080 	.word	0x20000080
+ 80010e0:	40020000 	.word	0x40020000
+
+080010e4 <PS_StartPots>:
+ * @param  None
+ * @retval none
+ */
+void PS_StartPots(void)
+{
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcValArray, 4);
+ 80010e4:	2204      	movs	r2, #4
+ 80010e6:	4902      	ldr	r1, [pc, #8]	; (80010f0 <PS_StartPots+0xc>)
+ 80010e8:	4802      	ldr	r0, [pc, #8]	; (80010f4 <PS_StartPots+0x10>)
+ 80010ea:	f003 bd17 	b.w	8004b1c <HAL_ADC_Start_DMA>
+ 80010ee:	bf00      	nop
+ 80010f0:	20012a2c 	.word	0x20012a2c
+ 80010f4:	20013a30 	.word	0x20013a30
+
+080010f8 <map>:
+}
+
+int map(int in, int inMin, int inMax, int outMin, int outMax) {
+ 80010f8:	b510      	push	{r4, lr}
+  // check it's within the range
+  if (inMin<inMax) { 
+ 80010fa:	4291      	cmp	r1, r2
+int map(int in, int inMin, int inMax, int outMin, int outMax) {
+ 80010fc:	9c02      	ldr	r4, [sp, #8]
+  if (inMin<inMax) { 
+ 80010fe:	da05      	bge.n	800110c <map+0x14>
+    if (in <= inMin) 
+ 8001100:	4281      	cmp	r1, r0
+ 8001102:	da1e      	bge.n	8001142 <map+0x4a>
+      return outMin;
+    if (in >= inMax)
+ 8001104:	4282      	cmp	r2, r0
+ 8001106:	dc05      	bgt.n	8001114 <map+0x1c>
+      return outMax;
+ 8001108:	4623      	mov	r3, r4
+ 800110a:	e01a      	b.n	8001142 <map+0x4a>
+  } else {  // cope with input range being backwards.
+    if (in >= inMin) 
+ 800110c:	4281      	cmp	r1, r0
+ 800110e:	dd18      	ble.n	8001142 <map+0x4a>
+      return outMin;
+    if (in <= inMax)
+ 8001110:	4282      	cmp	r2, r0
+ 8001112:	daf9      	bge.n	8001108 <map+0x10>
+      return outMax;
+  }
+  // calculate how far into the range we are
+  float scale = (in-inMin)/(inMax-inMin);
+  // calculate the output.
+  return outMin + scale*(outMax-outMin);
+ 8001114:	1ae4      	subs	r4, r4, r3
+ 8001116:	ee07 4a90 	vmov	s15, r4
+ 800111a:	eef8 6ae7 	vcvt.f32.s32	s13, s15
+ 800111e:	ee07 3a90 	vmov	s15, r3
+  float scale = (in-inMin)/(inMax-inMin);
+ 8001122:	1a40      	subs	r0, r0, r1
+  return outMin + scale*(outMax-outMin);
+ 8001124:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
+  float scale = (in-inMin)/(inMax-inMin);
+ 8001128:	1a52      	subs	r2, r2, r1
+ 800112a:	fb90 f0f2 	sdiv	r0, r0, r2
+ 800112e:	ee07 0a90 	vmov	s15, r0
+ 8001132:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+  return outMin + scale*(outMax-outMin);
+ 8001136:	eea6 7aa7 	vfma.f32	s14, s13, s15
+ 800113a:	eefd 7ac7 	vcvt.s32.f32	s15, s14
+ 800113e:	ee17 3a90 	vmov	r3, s15
+}
+ 8001142:	4618      	mov	r0, r3
+ 8001144:	bd10      	pop	{r4, pc}
+	...
+
+08001148 <HAL_ADC_ConvCpltCallback>:
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	uint16_t read = &adcValArray;
+	int16_t note = (short) &adcValArray[1];
+	// Conversion Complete & DMA Transfer Complete As Well
+	currentNote = (int) &adcValArray[0] / 8;
+ 8001148:	4a03      	ldr	r2, [pc, #12]	; (8001158 <HAL_ADC_ConvCpltCallback+0x10>)
+ 800114a:	4b04      	ldr	r3, [pc, #16]	; (800115c <HAL_ADC_ConvCpltCallback+0x14>)
+ 800114c:	2108      	movs	r1, #8
+ 800114e:	fb93 f3f1 	sdiv	r3, r3, r1
+ 8001152:	7013      	strb	r3, [r2, #0]
+}
+ 8001154:	4770      	bx	lr
+ 8001156:	bf00      	nop
+ 8001158:	20012a34 	.word	0x20012a34
+ 800115c:	20012a2c 	.word	0x20012a2c
 
 08001160 <ADSR_init>:
 
@@ -4919,13 +4923,13 @@ static void MX_GPIO_Init(void)
   if (HAL_RNG_Init(&hrng) != HAL_OK)
  8002970:	f003 fd90 	bl	8006494 <HAL_RNG_Init>
   PS_StartPots();
- 8002974:	f7fe fa70 	bl	8000e58 <PS_StartPots>
+ 8002974:	f7fe fbb6 	bl	80010e4 <PS_StartPots>
   Synth_Init();
  8002978:	f001 fb2a 	bl	8003fd0 <Synth_Init>
   WM8731_Init();
  800297c:	f001 ff7a 	bl	8004874 <WM8731_Init>
     PS_Application();
- 8002980:	f7fe fa9c 	bl	8000ebc <PS_Application>
+ 8002980:	f7fe fa48 	bl	8000e14 <PS_Application>
  8002984:	e7fc      	b.n	8002980 <main+0x234>
  8002986:	bf00      	nop
  8002988:	40023800 	.word	0x40023800
@@ -8220,14 +8224,14 @@ void sequencer_newSequence_action(void) // User callback function called by sequ
  800424c:	b93b      	cbnz	r3, 800425e <sequencer_newSequence_action+0x1e>
 		MagicPatch(MIDI_MAXi);
  800424e:	207f      	movs	r0, #127	; 0x7f
- 8004250:	f7fc fea6 	bl	8000fa0 <MagicPatch>
+ 8004250:	f7fc fe46 	bl	8000ee0 <MagicPatch>
 		MagicFX(MIDI_MAXi);
  8004254:	207f      	movs	r0, #127	; 0x7f
 	}
 }
  8004256:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
 		MagicFX(MIDI_MAXi);
- 800425a:	f7fc be5d 	b.w	8000f18 <MagicFX>
+ 800425a:	f7fc bdfd 	b.w	8000e58 <MagicFX>
 }
  800425e:	bd08      	pop	{r3, pc}
  8004260:	200129e4 	.word	0x200129e4
@@ -9136,7 +9140,7 @@ void EXTI9_5_IRQHandler(void)
  80047a6:	069b      	lsls	r3, r3, #26
  80047a8:	d501      	bpl.n	80047ae <EXTI9_5_IRQHandler+0xe>
 	 Trigger();
- 80047aa:	f7fc fb33 	bl	8000e14 <Trigger>
+ 80047aa:	f7fc fc79 	bl	80010a0 <Trigger>
   }
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
@@ -10123,7 +10127,7 @@ static void ADC_DMAError(DMA_HandleTypeDef *hdma)
  8004cb4:	641a      	strpl	r2, [r3, #64]	; 0x40
     HAL_ADC_ConvCpltCallback(hadc);
  8004cb6:	4618      	mov	r0, r3
- 8004cb8:	f7fc f922 	bl	8000f00 <HAL_ADC_ConvCpltCallback>
+ 8004cb8:	f7fc fa46 	bl	8001148 <HAL_ADC_ConvCpltCallback>
 }
  8004cbc:	bd10      	pop	{r4, pc}
     if ((hadc->State & HAL_ADC_STATE_ERROR_INTERNAL) != 0UL)
@@ -12468,7 +12472,7 @@ static void I2S_DMATxHalfCplt(DMA_HandleTypeDef *hdma)
 #else
   HAL_I2S_TxHalfCpltCallback(hi2s);
  8005a52:	6b80      	ldr	r0, [r0, #56]	; 0x38
- 8005a54:	f7fb fb76 	bl	8001144 <HAL_I2S_TxHalfCpltCallback>
+ 8005a54:	f7fb fb16 	bl	8001084 <HAL_I2S_TxHalfCpltCallback>
 #endif /* USE_HAL_I2S_REGISTER_CALLBACKS */
 }
  8005a58:	bd08      	pop	{r3, pc}
@@ -12495,7 +12499,7 @@ static void I2S_DMATxHalfCplt(DMA_HandleTypeDef *hdma)
  8005a70:	f883 2041 	strb.w	r2, [r3, #65]	; 0x41
   HAL_I2S_TxCpltCallback(hi2s);
  8005a74:	4618      	mov	r0, r3
- 8005a76:	f7fb fb57 	bl	8001128 <HAL_I2S_TxCpltCallback>
+ 8005a76:	f7fb faf7 	bl	8001068 <HAL_I2S_TxCpltCallback>
 }
  8005a7a:	bd08      	pop	{r3, pc}
 
@@ -12648,7 +12652,7 @@ static void I2S_IRQHandler(I2S_HandleTypeDef *hi2s)
  8005b38:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
     HAL_I2S_TxCpltCallback(hi2s);
  8005b3c:	4620      	mov	r0, r4
- 8005b3e:	f7fb faf3 	bl	8001128 <HAL_I2S_TxCpltCallback>
+ 8005b3e:	f7fb fa93 	bl	8001068 <HAL_I2S_TxCpltCallback>
     {
       I2S_Transmit_IT(hi2s);
     }
