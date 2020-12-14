@@ -61,7 +61,10 @@ extern float filterFreq2;
 
 extern ADSR_t adsr;
 extern int8_t currentNote;
+extern int16_t currentFreq;
 extern int8_t velocity;
+
+extern bool triggered;
 
 /*--------------------------------------------------------------*/
 
@@ -298,6 +301,13 @@ void Phaser_switch(uint8_t val) {
 		phaserON = false;
 }
 /*-------------------------------------------------------*/
+void toggleSound(void) {
+	if (sound < LAST_SOUND)
+		(sound)++;
+	else
+		sound = 0;
+}
+/*-------------------------------------------------------*/
 void nextSound(void) {
 	if (sound < LAST_SOUND)
 		(sound)++;
@@ -397,12 +407,12 @@ void FM_OP4_freqMul_dec(uint8_t val) {
 void Synth_Init(void) {
 
 	vol = env = 1;
-	sound = WT_SINE;
-	autoFilterON = false;
+	sound = 0;
+	autoFilterON = true;
 	autoSound = 0;
 	chorusON = false;
-	delayON = false;
-	phaserON = true;
+	delayON = true;
+	phaserON = false;
 
 	Delay_init();
 	drifter_init();
@@ -511,8 +521,10 @@ void make_sound(uint16_t *buf, uint16_t length) // To be used with the Sequencer
 		if (sequencerIsOn == true) {
 			sequencer_process(); //computes f0 and calls sequencer_newStep_action() and sequencer_newSequence_action()
 		} else {
-			f0 = notesFreq[currentNote];
-			vol = (float) velocity / 127.0f;
+//			f0 = notesFreq[currentNote];
+			 f0 = (notesFreq[currentNote] + currentFreq) / 2;
+//			vol = (float) velocity / 127.0f;
+			vol = triggered ? 1 : 0;
 		}
 
 		/*--- compute vibrato modulation ---*/

@@ -112,6 +112,7 @@ void incDecay(void);
 void decDecay(void);
 void setDecayFactor(uint8_t val);
 
+void toggleSound(void);
 void nextSound(void);
 void prevSound(void);
 void Sound_set(uint8_t val);

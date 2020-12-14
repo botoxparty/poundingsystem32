@@ -1,3 +1,4 @@
+phaser.c:91:14:allpass	0	static
 phaser.c:51:6:PhaserInit	0	static
 phaser.c:64:6:Phaser_Rate_set	0	static
 phaser.c:70:6:Phaser_Feedback_set	0	static

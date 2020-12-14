@@ -41,7 +41,11 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+bool test1 = false;
+bool test2 = false;
+bool test3 = false;
+bool test4 = false;
+int test5 = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -186,7 +190,7 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
-
+	DebounceUserButton();
   /* USER CODE END SysTick_IRQn 1 */
 }
 
@@ -203,7 +207,7 @@ void SysTick_Handler(void)
 void EXTI2_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI2_IRQn 0 */
-
+  // Toggle_Hold(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2));
   /* USER CODE END EXTI2_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
   /* USER CODE BEGIN EXTI2_IRQn 1 */
@@ -239,14 +243,69 @@ void DMA1_Stream4_IRQHandler(void)
   /* USER CODE END DMA1_Stream4_IRQn 1 */
 }
 
+uint8_t f(bool bits[]) {
+	uint8_t aVal;
+
+	for ( uint8_t i = 0; i < 8; i++ )
+	{
+	    aVal = aVal << 1 | bits[i];
+	}
+	return aVal;
+}
+
 /**
   * @brief This function handles EXTI line[9:5] interrupts.
   */
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-  if(__HAL_GPIO_EXTI_GET_FLAG(GPIO_PIN_5)) {
+  if(__HAL_GPIO_EXTI_GET_FLAG(FIRE_BTN_Pin)) {
 	 Trigger();
+  }
+
+
+  if(__HAL_GPIO_EXTI_GET_FLAG(SND_SW1_Pin) || __HAL_GPIO_EXTI_GET_FLAG(SND_SW2_Pin) || __HAL_GPIO_EXTI_GET_FLAG(SND_SW3_Pin)) {
+	  bool sound_switch_1 = HAL_GPIO_ReadPin(SND_SW1_GPIO_Port, SND_SW1_Pin);
+	  bool sound_switch_2 = HAL_GPIO_ReadPin(SND_SW2_GPIO_Port, SND_SW2_Pin);
+	  bool sound_switch_3 = HAL_GPIO_ReadPin(SND_SW3_GPIO_Port, SND_SW3_Pin);
+	  bool sound_switch_4 = HAL_GPIO_ReadPin(SND_SW4_GPIO_Port, SND_SW4_Pin);
+	  bool bits[4] = {sound_switch_1, sound_switch_2, sound_switch_3, sound_switch_4};
+
+    uint8_t test6 = f(bits);
+    test5 = test6;
+    toggleSound();
+    /*
+     *
+     * POS 1 = 1 0 0 0
+     * POS 2 =
+     * POS 3 = 1 0 0 1
+     * POS 4 = 0 1 0 1
+     * POS 5 = 1 1 0 0
+     * POS 6 = 0 1 0 1
+     * POS 7 = 1 1 0 1
+     * POS 8 =
+     * POS 9 = 1 0 1 0
+     *
+     *
+     */
+
+
+
+
+
+	  // Low pass - capacitor and resister combination
+	  // Filter out high frequency signals (peaks on the line)
+
+	  // store and check the state
+	  // connect the switch to the discovery board
+	  // 1. trigger interrupt
+	  // 2. increment count variable
+	  // 3. monitor the variable value
+	  // 4. observe the difference in expected value
+	  // 5. connect resistor and capacitor and re-test
+	  //    calculate the values using osciliscope
+	  //
+
   }
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);

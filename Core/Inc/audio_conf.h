@@ -38,7 +38,7 @@ typedef enum
 
 /* Exported functions ------------------------------------------------------- */
 void audio_init(void);
-void toggleSound(void);
+// void toggleSound(void);
 void incVol(void);
 void decVol(void);
 void Volume_set(uint8_t val);

@@ -102,20 +102,20 @@ void BSP_AUDIO_OUT_Error_CallBack(void)
 
 
 //--------------------------------- toggle ON/OFF volume ------------------------------------------
-void toggleSound(void)
-{
-	if ( ! sound )
-	{
-		//pitchGenResetPhase();
-		BSP_AUDIO_OUT_SetVolume(volume);
-		sound = true;
-	}
-	else
-	{
-		BSP_AUDIO_OUT_SetVolume(0);
-		sound = false;
-	}
-}
+// void toggleSound(void)
+// {
+// 	if ( ! sound )
+// 	{
+// 		//pitchGenResetPhase();
+// 		BSP_AUDIO_OUT_SetVolume(volume);
+// 		sound = true;
+// 	}
+// 	else
+// 	{
+// 		BSP_AUDIO_OUT_SetVolume(0);
+// 		sound = false;
+// 	}
+// }
 //------------------------------- increase output DAC volume --------------------------------------------
 void incVol(void)
 {

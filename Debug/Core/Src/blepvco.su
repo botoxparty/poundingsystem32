@@ -1,8 +1,8 @@
 blepvco.c:52:6:place_step_dd	24	static
 blepvco.c:76:6:place_slope_dd	32	static
-blepvco.c:98:6:VCO_blepsaw_Init	0	static
-blepvco.c:111:7:VCO_blepsaw_SampleCompute	48	static
-blepvco.c:195:6:VCO_bleprect_Init	0	static
-blepvco.c:208:7:VCO_bleprect_SampleCompute	64	static
-blepvco.c:370:6:VCO_bleptri_Init	0	static
-blepvco.c:383:7:VCO_bleptri_SampleCompute	80	static
+blepvco.c:98:6:VCO_blepsaw_Init	8	static
+blepvco.c:111:7:VCO_blepsaw_SampleCompute	40	static
+blepvco.c:195:6:VCO_bleprect_Init	8	static
+blepvco.c:208:7:VCO_bleprect_SampleCompute	48	static
+blepvco.c:370:6:VCO_bleptri_Init	8	static
+blepvco.c:383:7:VCO_bleptri_SampleCompute	48	static

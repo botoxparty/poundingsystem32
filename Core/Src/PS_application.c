@@ -18,6 +18,7 @@ static unsigned short bpm_led_state = 0;
 extern uint16_t audiobuff[BUFF_LEN]; // THE audio buffer
 extern uint16_t adcValArray[4];
 extern ADC_HandleTypeDef hadc1;
+extern uint32_t shift;
 
 /*-----------------------------------------------------------------------------*/
 /**
@@ -29,7 +30,7 @@ void PS_Application(void)
 {
 	bpm_led_state = !bpm_led_state;
 	HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
-	int delay = map((int)adcValArray[0], 0, 4096, 200, 1000);
+	int delay = (shift / 48000) * 10000;
 	HAL_Delay(delay);
 }
 

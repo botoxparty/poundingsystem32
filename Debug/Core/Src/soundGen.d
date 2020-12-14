@@ -1,6 +1,6 @@
 Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
  ../Core/Inc/CONSTANTS.h ../Core/Inc/PS_application.h \
- ../Core/Inc/PS_interface.h ../Core/Inc/random.h \
+ ../Core/Inc/PS_interface.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -34,13 +34,14 @@ Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/main.h ../Core/Inc/audio_conf.h ../Core/Inc/soundGen.h \
- ../Core/Inc/wm8731.h ../Core/Inc/timers.h ../Core/Inc/audio_conf.h \
- ../Core/Inc/delay.h ../Core/Inc/chorusFD.h ../Core/Inc/sinetable.h \
- ../Core/Inc/drifter.h ../Core/Inc/resonantFilter.h \
- ../Core/Inc/math_tools.h ../Core/Inc/adsr.h ../Core/Inc/sequencer.h \
- ../Core/Inc/notesTables.h ../Core/Inc/oscillators.h \
- ../Core/Inc/blepvco.h ../Core/Inc/minblep_tables.h ../Core/Inc/phaser.h
+ ../Core/Inc/delay.h ../Core/Inc/random.h ../Core/Inc/main.h \
+ ../Core/Inc/audio_conf.h ../Core/Inc/soundGen.h ../Core/Inc/wm8731.h \
+ ../Core/Inc/timers.h ../Core/Inc/audio_conf.h ../Core/Inc/chorusFD.h \
+ ../Core/Inc/sinetable.h ../Core/Inc/drifter.h \
+ ../Core/Inc/resonantFilter.h ../Core/Inc/math_tools.h ../Core/Inc/adsr.h \
+ ../Core/Inc/sequencer.h ../Core/Inc/notesTables.h \
+ ../Core/Inc/oscillators.h ../Core/Inc/blepvco.h \
+ ../Core/Inc/minblep_tables.h ../Core/Inc/phaser.h
 
 ../Core/Inc/soundGen.h:
 
@@ -49,8 +50,6 @@ Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
 ../Core/Inc/PS_application.h:
 
 ../Core/Inc/PS_interface.h:
-
-../Core/Inc/random.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -118,6 +117,10 @@ Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
+../Core/Inc/delay.h:
+
+../Core/Inc/random.h:
+
 ../Core/Inc/main.h:
 
 ../Core/Inc/audio_conf.h:
@@ -129,8 +132,6 @@ Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
 ../Core/Inc/timers.h:
 
 ../Core/Inc/audio_conf.h:
-
-../Core/Inc/delay.h:
 
 ../Core/Inc/chorusFD.h:
 

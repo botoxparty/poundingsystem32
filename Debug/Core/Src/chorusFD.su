@@ -1,7 +1,4 @@
 chorusFD.c:52:7:Lfo_SampleCompute	8	static
-chorusFD.c:69:6:ChorusDelay_init	0	static
-chorusFD.c:81:6:Chorus_init	20	static
-chorusFD.c:99:6:Chorus_reset	0	static
 chorusFD.c:105:6:inc_chorusRate	0	static
 chorusFD.c:111:6:dec_chorusRate	0	static
 chorusFD.c:117:6:ChorusRate_set	0	static
@@ -23,10 +20,13 @@ chorusFD.c:237:6:Delay_set_delay	0	static
 chorusFD.c:242:6:Delay_set_fb	0	static
 chorusFD.c:247:6:Delay_set_fw	0	static
 chorusFD.c:252:6:Delay_set_mix	0	static
+chorusFD.c:69:6:ChorusDelay_init	24	static
+chorusFD.c:81:6:Chorus_init	16	static
+chorusFD.c:99:6:Chorus_reset	8	static
 chorusFD.c:257:7:Delay_get_fb	0	static
 chorusFD.c:262:7:Delay_get_fw	0	static
 chorusFD.c:267:7:Delay_get_mix	0	static
 chorusFD.c:272:6:delay_write	0	static
 chorusFD.c:281:7:delay_read	16	static
-chorusFD.c:327:7:mono_chorus_compute	32	static
+chorusFD.c:327:7:mono_chorus_compute	24	static
 chorusFD.c:352:6:stereoChorus_compute	24	static

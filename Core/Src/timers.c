@@ -88,31 +88,31 @@ void DebounceUserButton(void) // Called by SysTick_Handler() in file stm32f4xx_i
 {
 	bool RawState;
 
-//	RawState = (bool)BSP_PB_GetState(BUTTON_KEY);
-//
-//	if (RawState == DebouncedKeyPress) {
-//		// Set the timer which allows a change from current state.
-//		if (DebouncedKeyPress) Count = RELEASE_MSEC / CHECK_MSEC;
-//		else Count = PRESS_MSEC / CHECK_MSEC;
-//
-//	} else {
-//		// Key has changed - wait for new state to become stable.
-//		if (--Count == 0) {
-//			// Timer expired - accept the change.
-//			DebouncedKeyPress = RawState;
-//			Key_changed = true;
-//			Key_pressed = DebouncedKeyPress;
-//			// And reset the timer.
-//			if (DebouncedKeyPress) // rising edge
-//			{
-//				Count = RELEASE_MSEC / CHECK_MSEC;
-//				ButtonPressed_action();
-//			}
-//			else // falling edge
-//			{
-//				Count = PRESS_MSEC / CHECK_MSEC;
-//				ButtonReleased_action();
-//			}
-//		}
-//	}
+	RawState = (bool) HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2);
+
+	if (RawState == DebouncedKeyPress) {
+		// Set the timer which allows a change from current state.
+		if (DebouncedKeyPress) Count = RELEASE_MSEC / CHECK_MSEC;
+		else Count = PRESS_MSEC / CHECK_MSEC;
+
+	} else {
+		// Key has changed - wait for new state to become stable.
+		if (--Count == 0) {
+			// Timer expired - accept the change.
+			DebouncedKeyPress = RawState;
+			Key_changed = true;
+			Key_pressed = DebouncedKeyPress;
+			// And reset the timer.
+			if (DebouncedKeyPress) // rising edge
+			{
+				Count = RELEASE_MSEC / CHECK_MSEC;
+				ButtonPressed_action();
+			}
+			else // falling edge
+			{
+				Count = PRESS_MSEC / CHECK_MSEC;
+				ButtonReleased_action();
+			}
+		}
+	}
 }

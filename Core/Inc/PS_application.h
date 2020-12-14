@@ -18,6 +18,7 @@
 
 #include "PS_interface.h"
 #include "CONSTANTS.h"
+#include "delay.h"
 #include "random.h"
 #include "drifter.h"
 #include "sinetable.h"
@@ -35,10 +36,7 @@ extern int8_t velocity;
 
 void MagicFX(uint8_t val);
 void MagicPatch(uint8_t val);
-void Reset_notes_On(void);
-
 void PS_Application(void);
-void Trigger(void);
-void PS_StartPots(void);
+
 /*------------------------------------------------------------------------------*/
 #endif /* PS_Application_H_ */

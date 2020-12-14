@@ -15,8 +15,8 @@ oscillators.c:215:9:OpSampleCompute3	16	static
 oscillators.c:231:9:OpSampleCompute4	16	static
 oscillators.c:258:9:OpSampleCompute5	0	static
 oscillators.c:272:9:MorphingSaw_SampleCompute	0	static
-oscillators.c:80:9:Drifters_sampleCompute	24	static
+oscillators.c:80:9:Drifters_sampleCompute	32	static
 oscillators.c:288:9:BasicSquare_SampleCompute	0	static
-oscillators.c:303:6:AdditiveGen_newWaveform	40	static
-oscillators.c:319:9:AdditiveGen_SampleCompute	12	static
-oscillators.c:343:7:waveCompute	16	static
+oscillators.c:303:6:AdditiveGen_newWaveform	8	static
+oscillators.c:319:9:AdditiveGen_SampleCompute	4	static
+oscillators.c:343:7:waveCompute	24	static
