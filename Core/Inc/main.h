@@ -88,7 +88,6 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define FIRE_BTN_Pin GPIO_PIN_5
 #define FIRE_BTN_GPIO_Port GPIOA
-#define FIRE_BTN_EXTI_IRQn EXTI9_5_IRQn
 #define SND_SW1_Pin GPIO_PIN_6
 #define SND_SW1_GPIO_Port GPIOA
 #define SND_SW1_EXTI_IRQn EXTI9_5_IRQn
@@ -100,9 +99,9 @@ void Error_Handler(void);
 #define SND_SW3_EXTI_IRQn EXTI4_IRQn
 #define SND_SW4_Pin GPIO_PIN_5
 #define SND_SW4_GPIO_Port GPIOC
+#define SND_SW4_EXTI_IRQn EXTI9_5_IRQn
 #define HOLD_SW_Pin GPIO_PIN_2
 #define HOLD_SW_GPIO_Port GPIOB
-#define HOLD_SW_EXTI_IRQn EXTI2_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

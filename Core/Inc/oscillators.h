@@ -27,8 +27,25 @@
 #include "blepvco.h"
 /*----------------------------------------------------------------------------*/
 
-enum timbre { MORPH_SAW = 0, SPLIT, ACC_SINE, WT_SINE, ADDITIVE, POWER_SINE, BLEPTRIANGLE, BLEPSQUARE,
-	NOISE, CHORD15, CHORD135, CHORD13min5, VOICES3, DRIFTERS, FM2, BLEPSAW, LAST_SOUND };
+enum timbre {
+	// MORPH_SAW = 0,
+	// SPLIT,
+	// ACC_SINE = 0,
+	WT_SINE = 0,
+	// POWER_SINE,
+	BLEPTRIANGLE,
+	BLEPSQUARE,
+	NOISE,
+	ADDITIVE,
+	// CHORD15,
+	CHORD135,
+	CHORD13min5,
+	VOICES3,
+	// DRIFTERS,
+	// FM2,
+	// BLEPSAW,
+	LAST_SOUND
+	};
 
 /*----------------------------------------------------------------------------*/
 typedef struct

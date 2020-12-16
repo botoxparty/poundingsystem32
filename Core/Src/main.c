@@ -441,7 +441,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : FIRE_BTN_Pin */
   GPIO_InitStruct.Pin = FIRE_BTN_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(FIRE_BTN_GPIO_Port, &GPIO_InitStruct);
 
@@ -451,28 +451,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : SND_SW3_Pin */
-  GPIO_InitStruct.Pin = SND_SW3_Pin;
+  /*Configure GPIO pins : SND_SW3_Pin SND_SW4_Pin */
+  GPIO_InitStruct.Pin = SND_SW3_Pin|SND_SW4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(SND_SW3_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : SND_SW4_Pin */
-  GPIO_InitStruct.Pin = SND_SW4_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(SND_SW4_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : HOLD_SW_Pin */
   GPIO_InitStruct.Pin = HOLD_SW_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(HOLD_SW_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI2_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI2_IRQn);
-
   HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 

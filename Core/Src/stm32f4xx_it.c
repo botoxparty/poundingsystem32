@@ -190,7 +190,10 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
-	DebounceUserButton();
+  TimingDelay_Decrement();
+  update_temporized_LED();
+	DebounceFireButton();
+  DebounceHoldSwitch();
   /* USER CODE END SysTick_IRQn 1 */
 }
 
@@ -202,26 +205,12 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles EXTI line2 interrupt.
-  */
-void EXTI2_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI2_IRQn 0 */
-  // Toggle_Hold(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2));
-  /* USER CODE END EXTI2_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
-  /* USER CODE BEGIN EXTI2_IRQn 1 */
-
-  /* USER CODE END EXTI2_IRQn 1 */
-}
-
-/**
   * @brief This function handles EXTI line4 interrupt.
   */
 void EXTI4_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI4_IRQn 0 */
-
+  // toggleSound();
   /* USER CODE END EXTI4_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
   /* USER CODE BEGIN EXTI4_IRQn 1 */
@@ -243,36 +232,26 @@ void DMA1_Stream4_IRQHandler(void)
   /* USER CODE END DMA1_Stream4_IRQn 1 */
 }
 
-uint8_t f(bool bits[]) {
-	uint8_t aVal;
-
-	for ( uint8_t i = 0; i < 8; i++ )
-	{
-	    aVal = aVal << 1 | bits[i];
-	}
-	return aVal;
-}
-
 /**
   * @brief This function handles EXTI line[9:5] interrupts.
   */
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-  if(__HAL_GPIO_EXTI_GET_FLAG(FIRE_BTN_Pin)) {
-	 Trigger();
-  }
+  // if(__HAL_GPIO_EXTI_GET_FLAG(FIRE_BTN_Pin)) {
+	//  Trigger();
+  // }
 
 
-  if(__HAL_GPIO_EXTI_GET_FLAG(SND_SW1_Pin) || __HAL_GPIO_EXTI_GET_FLAG(SND_SW2_Pin) || __HAL_GPIO_EXTI_GET_FLAG(SND_SW3_Pin)) {
+  if(__HAL_GPIO_EXTI_GET_FLAG(SND_SW1_Pin) || __HAL_GPIO_EXTI_GET_FLAG(SND_SW2_Pin) || __HAL_GPIO_EXTI_GET_FLAG(SND_SW3_Pin) || __HAL_GPIO_EXTI_GET_FLAG(SND_SW4_Pin)) {
 	  bool sound_switch_1 = HAL_GPIO_ReadPin(SND_SW1_GPIO_Port, SND_SW1_Pin);
 	  bool sound_switch_2 = HAL_GPIO_ReadPin(SND_SW2_GPIO_Port, SND_SW2_Pin);
 	  bool sound_switch_3 = HAL_GPIO_ReadPin(SND_SW3_GPIO_Port, SND_SW3_Pin);
 	  bool sound_switch_4 = HAL_GPIO_ReadPin(SND_SW4_GPIO_Port, SND_SW4_Pin);
 	  bool bits[4] = {sound_switch_1, sound_switch_2, sound_switch_3, sound_switch_4};
 
-    uint8_t test6 = f(bits);
-    test5 = test6;
+    // uint8_t test6 = f(bits);
+    // test5 = test6;
     toggleSound();
     /*
      *

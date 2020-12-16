@@ -25,5 +25,8 @@ void PS_Interface_Loop(void);
 void Trigger(void);
 void Toggle_Hold(GPIO_PinState val);
 void Reset_notes_On(void);
+void PS_LED_On(void);
+void PS_LED_Off(void);
+void PS_LED_Toggle(void);
 
 #endif /* PS_Interface_H_ */

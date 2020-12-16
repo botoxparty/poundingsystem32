@@ -1,4 +1,5 @@
 timers.c:42:6:TimingDelay_Decrement	0	static
-timers.c:56:10:getTime	0	static
-timers.c:61:6:setTime	0	static
-timers.c:87:6:DebounceUserButton	8	static
+timers.c:64:6:PS_StartBPMLED	8	static
+timers.c:71:6:update_temporized_LED	8	static
+timers.c:85:6:DebounceFireButton	8	static
+timers.c:121:6:DebounceHoldSwitch	8	static

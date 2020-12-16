@@ -436,6 +436,9 @@ void Synth_Init(void) {
 	VCO_blepsaw_Init(&mbSawOsc);
 	VCO_bleprect_Init(&mbRectOsc);
 	VCO_bleptri_Init(&mbTriOsc);
+	AttTime_set(MIDI_MAX);
+	DecTime_set(MIDI_MAX);
+	RelTime_set(MIDI_MAX);
 }
 /*---------------------------------------------------------------------------------------*/
 
@@ -465,7 +468,7 @@ void sequencer_newStep_action(void) // User callback function called by sequence
 		switch (rand() % 4) // 4 random timbers
 		{
 		case 0:
-			sound = CHORD15;
+			sound = CHORD135;
 			break;
 		case 1:
 			AdditiveGen_newWaveform();
@@ -523,8 +526,8 @@ void make_sound(uint16_t *buf, uint16_t length) // To be used with the Sequencer
 		} else {
 //			f0 = notesFreq[currentNote];
 			 f0 = (notesFreq[currentNote] + currentFreq) / 2;
-//			vol = (float) velocity / 127.0f;
-			vol = triggered ? 1 : 0;
+			vol = (float) velocity / 127.0f;
+			// vol = triggered ? 1 : 0;
 		}
 
 		/*--- compute vibrato modulation ---*/

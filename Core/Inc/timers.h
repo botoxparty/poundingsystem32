@@ -25,9 +25,9 @@ void 		TimingDelay_Decrement(void);
 void 		setSysTick(void);
 uint32_t 	getTime(void);
 void 		setTime(uint32_t val);
-//void 		start_LED_On(Led_TypeDef Led, uint32_t duration);
-//void 		update_temporized_LED(Led_TypeDef Led);
-void 		DebounceUserButton(void);
-
+void 		PS_StartBPMLED();
+void 		update_temporized_LED();
+void 		DebounceFireButton(void);
+void        DebounceHoldSwitch(void);
 /*************************************************************************************/
 #endif /* __TIMERS_H */

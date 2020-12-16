@@ -36,7 +36,9 @@ void PS_Interface_Init(void)
 {
 
     PS_StartPots();
-    // DelayFeedback_set(80);
+    PS_StartBPMLED();
+    DelayFeedback_set(80);
+    DelayWet_set(127);
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -47,29 +49,28 @@ void PS_Interface_Init(void)
  */
 void PS_Interface_Loop(void)
 {
-//    bool hold = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2);
-//    if (hold)
-//    {
-//        velocity = 127;
-//        triggered = 1;
-//    } else {
-//        velocity = 0;
-//        triggered = 0;
-//    }
+    //    bool hold = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2);
+    //    if (hold)
+    //    {
+    //        velocity = 127;
+    //        triggered = 1;
+    //    } else {
+    //        velocity = 0;
+    //        triggered = 0;
+    //    }
 
     // HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
 }
 
 void Toggle_Hold(GPIO_PinState val)
 {
-//	if(val) {
-//		triggered = 1;
-//	} else {
-//		triggered = 0;
-//	}
-//	hold = val;
+    //	if(val) {
+    //		triggered = 1;
+    //	} else {
+    //		triggered = 0;
+    //	}
+    //	hold = val;
 }
-
 
 /*-----------------------------------------------------------------------------*/
 /**
@@ -80,32 +81,49 @@ void Toggle_Hold(GPIO_PinState val)
 void Trigger(void)
 {
 
-         if (triggered)
-         {
-             velocity = 0;
-             ADSR_keyOff(&adsr);
-         }
-         else
-         {
-             velocity = 127;
-             ADSR_keyOn(&adsr);
-            //  MagicPatch(MIDI_MAXi);
-         }
+    if (triggered)
+    {
+        velocity = 0;
+        ADSR_keyOff(&adsr);
+    }
+    else
+    {
+        velocity = 127;
+        ADSR_keyOn(&adsr);
+        //  MagicPatch(MIDI_MAXi);
+    }
 
-         triggered = !triggered;
+    triggered = !triggered;
 
-     HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
+    HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
 }
 
-void ButtonPressed_action(void)
-{ // User butter toggles sequencer
-    Toggle_Hold(true);
+void PS_LED_On(void)
+{
+    bpm_led_state = true;
+    HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
 }
 
-void ButtonReleased_action(void)
-{ // User butter toggles sequencer
-    Toggle_Hold(false);
+void PS_LED_Off(void)
+{
+    bpm_led_state = false;
+    HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
 }
+
+void PS_LED_Toggle(void)
+{
+    bpm_led_state = !bpm_led_state;
+    HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
+}
+// void ButtonPressed_action(void)
+// { // User butter toggles sequencer
+//     Toggle_Hold(true);
+// }
+
+// void ButtonReleased_action(void)
+// { // User butter toggles sequencer
+//     Toggle_Hold(false);
+// }
 
 /**
  * @brief  Starts reading the pots
@@ -118,8 +136,8 @@ void PS_StartPots(void)
 }
 
 float map(float val, float I_Min, float I_Max, float O_Min, float O_Max)
-	{
-		return O_Max - (((val-I_Min)*((O_Max-O_Min)/(I_Max-I_Min)))+O_Min);
+{
+    return O_Max - (((val - I_Min) * ((O_Max - O_Min) / (I_Max - I_Min))) + O_Min);
 }
 /*-----------------------------------------------------------------------------*/
 /**
@@ -129,16 +147,14 @@ float map(float val, float I_Min, float I_Max, float O_Min, float O_Max)
  */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
-	// set frequency
+    // set frequency
     currentFreq = map(adcValArray[1], 0, 4096, 20, 12600);
-    currentNote = map(adcValArray[1],  0, 4096, 0, 107);
+    currentNote = map(adcValArray[1], 0, 4096, 0, 107);
 
-    VibratoFreq_set(map(adcValArray[2],  0, 4096, 0, 107));
+    VibratoFreq_set(map(adcValArray[2], 0, 4096, 0, 107));
     VibratoAmp_set(MIDI_MAX);
-    // VibratoFreq_set(map(adcValArray[0],  0, 4096, 0, MIDI_MAX));
-    // seq_tempo_set(map(adcValArray[3],  0, 4096, 0, MIDI_MAX));
-    FM_OP1_modInd_set(map(adcValArray[2],  0, 4096, 0, 107));
-    // FM_OP1_freq_set(map(adcValArray[0],  0, 4096, 0, MIDI_MAX));
+
+    FM_OP1_modInd_set(map(adcValArray[3], 0, 4096, 0, MIDI_MAX));
     // Delay_time_set(map(adcValArray[3],  0, 4096, 0, MIDI_MAX));
 }
 

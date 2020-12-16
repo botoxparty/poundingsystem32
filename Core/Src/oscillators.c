@@ -350,17 +350,17 @@ float waveCompute(uint8_t sound, float frq)
 	/* choose waveform generator */
 	switch (sound)
 	{
-	case MORPH_SAW : 	y = 0.8f * MorphingSaw_SampleCompute(&op1); 		break ;
+	// case MORPH_SAW : 	y = 0.8f * MorphingSaw_SampleCompute(&op1); 		break ;
 
-	case SPLIT :  	{
-		if (frq < 200) y =  OpSampleCompute1(&op1);
-		else if (frq < 600) y = OpSampleCompute2(&op1);
-		else y = OpSampleCompute5(&op1);
-	} 	break;
+	// case SPLIT :  	{
+	// 	if (frq < 200) y =  OpSampleCompute1(&op1);
+	// 	else if (frq < 600) y = OpSampleCompute2(&op1);
+	// 	else y = OpSampleCompute5(&op1);
+	// } 	break;
 
-	case ACC_SINE : 		y = 0.8 * OpSampleCompute0(&op1); 		break;
+	// case ACC_SINE : 		y = 0.8 * OpSampleCompute0(&op1); 		break;
 
-	case POWER_SINE : 		y = OpSampleCompute3(&op1);				break;
+	// case POWER_SINE : 		y = OpSampleCompute3(&op1);				break;
 
 	case BLEPTRIANGLE :	 	mbTriOsc.freq = frq;
 	y = VCO_bleptri_SampleCompute(&mbTriOsc); break;
@@ -374,10 +374,10 @@ float waveCompute(uint8_t sound, float frq)
 
 	case NOISE : 			y = op1.amp * frand_a_b(-.8f , .8f);	break; // noise !
 
-	case CHORD15 : 	{	// fundamental + fifth : 1 5
-		OpSetFreq(&op2, frq * 1.50f);
-		y =  0.5f *(MorphingSaw_SampleCompute(&op1) + MorphingSaw_SampleCompute(&op2));
-	} break;
+	// case CHORD15 : 	{	// fundamental + fifth : 1 5
+	// 	OpSetFreq(&op2, frq * 1.50f);
+	// 	y =  0.5f *(MorphingSaw_SampleCompute(&op1) + MorphingSaw_SampleCompute(&op2));
+	// } break;
 
 	case CHORD135 :	{	// major chord : 1 3maj 5
 		OpSetFreq(&op2, frq * 1.26f);
@@ -398,14 +398,14 @@ float waveCompute(uint8_t sound, float frq)
 		y = 0.33f *(MorphingSaw_SampleCompute(&op1) + MorphingSaw_SampleCompute(&op2) + MorphingSaw_SampleCompute(&op3));
 	} break;
 
-	case DRIFTERS : 	y = Drifters_sampleCompute(); break;
+	// case DRIFTERS : 	y = Drifters_sampleCompute(); break;
 
-	case FM2 : 			y = FM2_sampleCompute(frq); break;
+	// case FM2 : 			y = FM2_sampleCompute(frq); break;
 
-	case BLEPSAW :		{
-		mbSawOsc.freq = frq;
-		y = VCO_blepsaw_SampleCompute(&mbSawOsc);
-	}	break;
+	// case BLEPSAW :		{
+	// 	mbSawOsc.freq = frq;
+	// 	y = VCO_blepsaw_SampleCompute(&mbSawOsc);
+	// }	break;
 
 	default :
 		y = 0;	break ;

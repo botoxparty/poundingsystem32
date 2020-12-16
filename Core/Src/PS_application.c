@@ -28,10 +28,10 @@ extern uint32_t shift;
  */
 void PS_Application(void)
 {
-	bpm_led_state = !bpm_led_state;
-	HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
-	int delay = (shift / 48000) * 10000;
-	HAL_Delay(delay);
+	// bpm_led_state = !bpm_led_state;
+	// HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
+	// uint16_t delay = shift / 10;
+	// HAL_Delay(delay);
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -74,25 +74,25 @@ void MagicPatch(uint8_t val) /* random sound parameters */
 		Sound_set(MIDIrandVal());
 		uint8_t snd = soundNumber_get();
 
-		if (snd == FM2)
-		{
-			FM_OP1_freq_set(MIDIrandVal());
-			FM_OP1_modInd_set(MIDIrandVal());
-			FM_OP2_freq_set(MIDIrandVal());
-			FM_OP2_modInd_set(MIDIrandVal());
-			FM_OP3_freq_set(MIDIrandVal());
-			FM_OP3_modInd_set(MIDIrandVal());
-			FM_OP4_freq_set(MIDIrandVal());
-			FM_OP4_modInd_set(MIDIrandVal());
-		}
-		else if (snd == DRIFTERS)
-		{
-			//STM_EVAL_LEDOn(LED_Green);
-			Drifter_amp_set(MIDIrandVal());
-			Drifter_minFreq_set(MIDIrandVal());
-			Drifter_maxFreq_set(MIDIrandVal());
-			Drifter_centralFreq_set(MIDIrandVal());
-		}
+		// if (snd == FM2)
+		// {
+		// 	FM_OP1_freq_set(MIDIrandVal());
+		// 	FM_OP1_modInd_set(MIDIrandVal());
+		// 	FM_OP2_freq_set(MIDIrandVal());
+		// 	FM_OP2_modInd_set(MIDIrandVal());
+		// 	FM_OP3_freq_set(MIDIrandVal());
+		// 	FM_OP3_modInd_set(MIDIrandVal());
+		// 	FM_OP4_freq_set(MIDIrandVal());
+		// 	FM_OP4_modInd_set(MIDIrandVal());
+		// }
+		// else if (snd == DRIFTERS)
+		// {
+		// 	//STM_EVAL_LEDOn(LED_Green);
+		// 	Drifter_amp_set(MIDIrandVal());
+		// 	Drifter_minFreq_set(MIDIrandVal());
+		// 	Drifter_maxFreq_set(MIDIrandVal());
+		// 	Drifter_centralFreq_set(MIDIrandVal());
+		// }
 
 		Filter1Freq_set(MIDIrandVal());
 		Filter1Res_set(MIDIrandVal());
