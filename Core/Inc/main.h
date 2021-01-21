@@ -50,7 +50,8 @@ extern "C" {
 // #include "lis302dl.h"
 
 // #include "usbh_MIDI.h"
-#include "wm8731.h"
+// #include "wm8731.h"
+#include "wm8978.h"
 #include "PS_application.h"
 #include "timers.h"
 #include "soundGen.h"
@@ -87,6 +88,26 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define SW1_A_Pin GPIO_PIN_13
+#define SW1_A_GPIO_Port GPIOC
+#define SW1_A_EXTI_IRQn EXTI15_10_IRQn
+#define SW1_B_Pin GPIO_PIN_14
+#define SW1_B_GPIO_Port GPIOC
+#define SW1_B_EXTI_IRQn EXTI15_10_IRQn
+#define SW1_BTN_Pin GPIO_PIN_15
+#define SW1_BTN_GPIO_Port GPIOC
+#define SW1_BTN_EXTI_IRQn EXTI15_10_IRQn
+#define LCD_CS_Pin GPIO_PIN_2
+#define LCD_CS_GPIO_Port GPIOA
+#define LCD_DC_Pin GPIO_PIN_3
+#define LCD_DC_GPIO_Port GPIOA
+#define LCD_BL_Pin GPIO_PIN_1
+#define LCD_BL_GPIO_Port GPIOB
+#define FIRE_BTN_Pin GPIO_PIN_7
+#define FIRE_BTN_GPIO_Port GPIOC
+#define FIRE_BTN_EXTI_IRQn EXTI9_5_IRQn
+#define FIRE_LED_Pin GPIO_PIN_8
+#define FIRE_LED_GPIO_Port GPIOC
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

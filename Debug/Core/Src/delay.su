@@ -7,4 +7,4 @@ delay.c:96:6:Delay_feedback_inc	0	static
 delay.c:103:6:Delay_feedback_dec	0	static
 delay.c:110:6:DelayFeedback_set	0	static
 delay.c:115:6:DelayWet_set	0	static
-delay.c:120:7:Delay_compute	16	static
+delay.c:120:7:Delay_compute	12	static

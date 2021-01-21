@@ -21,8 +21,6 @@ Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
@@ -33,9 +31,12 @@ Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/main.h ../Core/Inc/audio_conf.h ../Core/Inc/soundGen.h \
- ../Core/Inc/wm8731.h ../Core/Inc/timers.h ../Core/Inc/audio_conf.h \
+ ../Core/Inc/wm8978.h ../Core/Inc/timers.h ../Core/Inc/audio_conf.h \
  ../Core/Inc/delay.h ../Core/Inc/chorusFD.h ../Core/Inc/sinetable.h \
  ../Core/Inc/drifter.h ../Core/Inc/resonantFilter.h \
  ../Core/Inc/math_tools.h ../Core/Inc/adsr.h ../Core/Inc/sequencer.h \
@@ -92,10 +93,6 @@ Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h:
 
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:
-
-../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:
-
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
@@ -116,6 +113,12 @@ Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rng.h:
 
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
+
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
+
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
+
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
 ../Core/Inc/main.h:
@@ -124,7 +127,7 @@ Core/Src/soundGen.o: ../Core/Src/soundGen.c ../Core/Inc/soundGen.h \
 
 ../Core/Inc/soundGen.h:
 
-../Core/Inc/wm8731.h:
+../Core/Inc/wm8978.h:
 
 ../Core/Inc/timers.h:
 

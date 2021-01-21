@@ -1,0 +1,37 @@
+[
+    {
+        "name": "MainMenu",
+        "title": {
+            "name": "CURRENTSOUND",
+            "submenu": [
+                {
+                    "name": "Sine",
+                    "value": "FREQVAL"
+                },
+                {
+                    "name": "Sawtooth",
+                    "value": "MODVAL"
+                },
+                {
+                    "name": "Square",
+                    "value": "RATE"
+                }
+            ]
+        },
+        "items": [
+            {
+                "name": "Freq",
+                "value": "FREQVAL"
+            },
+            {
+                "name": "Mod",
+                "value": "MODVAL"
+            },
+            {
+                "name": "Rate",
+                "value": "RATE"
+            }
+        ]
+    }
+]
+

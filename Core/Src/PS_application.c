@@ -13,7 +13,7 @@
 
 /* Private define ------------------------------------------------------------*/
 
-int8_t currentNote;
+int8_t currentNote = 50;
 int8_t velocity;
 uint8_t notes_On[128] = {0};
 int8_t notesCount = 0; // number of notes on (keys pressed)
@@ -23,7 +23,7 @@ extern bool sequencerIsOn;
 static unsigned short bpm_led_state = 0;
 uint16_t adcValArray[4];
 extern uint16_t audiobuff[BUFF_LEN]; // THE audio buffer
-extern ADC_HandleTypeDef hadc1;
+//extern ADC_HandleTypeDef hadc1;
 
 /*-----------------------------------------------------------------------------*/
 /**
@@ -33,10 +33,8 @@ extern ADC_HandleTypeDef hadc1;
  */
 void PS_Application(void)
 {
-	bpm_led_state = !bpm_led_state;
-	HAL_GPIO_WritePin(PS_BPM_LED_GPIO, PS_BPM_LED, bpm_led_state);
-	int delay = map((int)adcValArray[0], 0, 4096, 200, 1000);
-	HAL_Delay(delay);
+	TriggerSound();
+	HAL_Delay(1000);
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -45,7 +43,7 @@ void PS_Application(void)
  * @param  None
  * @retval none
  */
-void Trigger(void)
+void TriggerSound(void)
 {
 	if(triggered) {
 		velocity = 0;
@@ -56,7 +54,7 @@ void Trigger(void)
 	}
 
 	triggered = !triggered;
-	HAL_GPIO_WritePin(PS_TRIG_LED_GPIO, PS_TRIG_LED, triggered);
+	HAL_GPIO_WritePin(FIRE_LED_GPIO_Port, FIRE_LED_Pin, triggered);
 }
 
 /**
@@ -66,7 +64,7 @@ void Trigger(void)
  */
 void PS_StartPots(void)
 {
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcValArray, 4);
+//  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcValArray, 4);
 }
 
 int map(int in, int inMin, int inMax, int outMin, int outMax) {
@@ -89,18 +87,18 @@ int map(int in, int inMin, int inMax, int outMin, int outMax) {
 }
 
 /*-----------------------------------------------------------------------------*/
-/**
- * @brief  ADC data receive callback.
- * @param  hadc: ADC handle
- * @retval None
- */
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
-{
-	uint16_t read = &adcValArray;
-	int16_t note = (short) &adcValArray[1];
-	// Conversion Complete & DMA Transfer Complete As Well
-	currentNote = (int) &adcValArray[0] / 8;
-}
+///**
+// * @brief  ADC data receive callback.
+// * @param  hadc: ADC handle
+// * @retval None
+// */
+//void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+//{
+//	uint16_t read = &adcValArray;
+//	int16_t note = (short) &adcValArray[1];
+//	// Conversion Complete & DMA Transfer Complete As Well
+//	currentNote = (int) &adcValArray[0] / 8;
+//}
 
 /*-----------------------------------------------------------------------------*/
 void MagicFX(uint8_t val) /* random effects parameters */
