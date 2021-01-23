@@ -1,25 +1,3 @@
-/***************************************************************************
-     *             __________               __   ___.
-     *   Open      \______   \ ____   ____ |  | _\_ |__   _______  ___
-     *   Source     |       _//  _ \_/ ___\|  |/ /| __ \ /  _ \  \/  /
-     *   Jukebox    |    |   (  <_> )  \___|    < | \_\ (  <_> > <  <
-     *   Firmware   |____|_  /\____/ \___  >__|_ \|___  /\____/__/\_ \
-     *                     \/            \/     \/    \/            \/
-     * $Id: wm8978.c 19619 2008-12-31 01:38:44Z jethead71 $
-     *
-     * Copyright (C) 2008 by Michael Sevakis
-     *
-     * Driver for WM8978 audio codec  
-     * 
-     * This program is free software; you can redistribute it and/or
-     * modify it under the terms of the GNU General Public License
-     * as published by the Free Software Foundation; either version 2
-     * of the License, or (at your option) any later version.
-     *
-     * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
-     * KIND, either express or implied.
-     * 
-     ****************************************************************************/
 #include "stm32f4xx.h"
 #include <stdint.h>
 #include "wm8978.h"

@@ -20,6 +20,8 @@ public:
     int x, y;
     int speed;
 
+    
+
     void init() {
 
     }
