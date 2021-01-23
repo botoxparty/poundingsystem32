@@ -11,7 +11,6 @@ C_SRCS += \
 ../Core/Src/chorusFD.c \
 ../Core/Src/delay.c \
 ../Core/Src/drifter.c \
-../Core/Src/main.c \
 ../Core/Src/math_tools.c \
 ../Core/Src/menu.c \
 ../Core/Src/minblep_tables.c \
@@ -31,6 +30,38 @@ C_SRCS += \
 ../Core/Src/system_stm32f4xx.c \
 ../Core/Src/timers.c \
 ../Core/Src/wm8978.c 
+
+CPP_SRCS += \
+../Core/Src/main.cpp \
+../Core/Src/wm8978.cpp 
+
+C_DEPS += \
+./Core/Src/PS_application.d \
+./Core/Src/adsr.d \
+./Core/Src/audio_conf.d \
+./Core/Src/blepvco.d \
+./Core/Src/chorusFD.d \
+./Core/Src/delay.d \
+./Core/Src/drifter.d \
+./Core/Src/math_tools.d \
+./Core/Src/menu.d \
+./Core/Src/minblep_tables.d \
+./Core/Src/nokia5110_LCD.d \
+./Core/Src/notesTables.d \
+./Core/Src/oscillators.d \
+./Core/Src/phaser.d \
+./Core/Src/random.d \
+./Core/Src/resonantFilter.d \
+./Core/Src/sequencer.d \
+./Core/Src/sinetable.d \
+./Core/Src/soundGen.d \
+./Core/Src/stm32f4xx_hal_msp.d \
+./Core/Src/stm32f4xx_it.d \
+./Core/Src/syscalls.d \
+./Core/Src/sysmem.d \
+./Core/Src/system_stm32f4xx.d \
+./Core/Src/timers.d \
+./Core/Src/wm8978.d 
 
 OBJS += \
 ./Core/Src/PS_application.o \
@@ -61,33 +92,8 @@ OBJS += \
 ./Core/Src/timers.o \
 ./Core/Src/wm8978.o 
 
-C_DEPS += \
-./Core/Src/PS_application.d \
-./Core/Src/adsr.d \
-./Core/Src/audio_conf.d \
-./Core/Src/blepvco.d \
-./Core/Src/chorusFD.d \
-./Core/Src/delay.d \
-./Core/Src/drifter.d \
+CPP_DEPS += \
 ./Core/Src/main.d \
-./Core/Src/math_tools.d \
-./Core/Src/menu.d \
-./Core/Src/minblep_tables.d \
-./Core/Src/nokia5110_LCD.d \
-./Core/Src/notesTables.d \
-./Core/Src/oscillators.d \
-./Core/Src/phaser.d \
-./Core/Src/random.d \
-./Core/Src/resonantFilter.d \
-./Core/Src/sequencer.d \
-./Core/Src/sinetable.d \
-./Core/Src/soundGen.d \
-./Core/Src/stm32f4xx_hal_msp.d \
-./Core/Src/stm32f4xx_it.d \
-./Core/Src/syscalls.d \
-./Core/Src/sysmem.d \
-./Core/Src/system_stm32f4xx.d \
-./Core/Src/timers.d \
 ./Core/Src/wm8978.d 
 
 
@@ -106,8 +112,8 @@ Core/Src/delay.o: ../Core/Src/delay.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DARM_MATH_CM4 -DDEBUG -c -I../Core/Inc -I../Drivers/StdPeriph -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/delay.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/drifter.o: ../Core/Src/drifter.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DARM_MATH_CM4 -DDEBUG -c -I../Core/Inc -I../Drivers/StdPeriph -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/drifter.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Core/Src/main.o: ../Core/Src/main.c
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DARM_MATH_CM4 -DDEBUG -c -I../Core/Inc -I../Drivers/StdPeriph -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+Core/Src/main.o: ../Core/Src/main.cpp
+	arm-none-eabi-g++ "$<" -mcpu=cortex-m4 -std=gnu++14 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DARM_MATH_CM4 -DDEBUG -c -I../Core/Inc -I../Drivers/StdPeriph -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/math_tools.o: ../Core/Src/math_tools.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DARM_MATH_CM4 -DDEBUG -c -I../Core/Inc -I../Drivers/StdPeriph -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/math_tools.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/menu.o: ../Core/Src/menu.c
@@ -146,4 +152,6 @@ Core/Src/timers.o: ../Core/Src/timers.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DARM_MATH_CM4 -DDEBUG -c -I../Core/Inc -I../Drivers/StdPeriph -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/timers.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/wm8978.o: ../Core/Src/wm8978.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DARM_MATH_CM4 -DDEBUG -c -I../Core/Inc -I../Drivers/StdPeriph -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/wm8978.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+Core/Src/wm8978.o: ../Core/Src/wm8978.cpp
+	arm-none-eabi-g++ "$<" -mcpu=cortex-m4 -std=gnu++14 -g3 -DSTM32F405xx -DUSE_HAL_DRIVER -DARM_MATH_CM4 -DDEBUG -c -I../Core/Inc -I../Drivers/StdPeriph -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/wm8978.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 
