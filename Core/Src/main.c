@@ -24,7 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "wm8978.h"
-#include "nokia5110_LCD.h"
+#include "maincpp.h"
 /* DMA buffers for I2S */
 //#include "audio.h"
 /* USER CODE END Includes */
@@ -52,16 +52,11 @@ extern ADSR_t adsr;
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c2;
-
 I2S_HandleTypeDef hi2s2;
 DMA_HandleTypeDef hdma_spi2_tx;
-
 RNG_HandleTypeDef hrng;
-
 SPI_HandleTypeDef hspi3;
-
 TIM_HandleTypeDef htim1;
-
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
@@ -127,27 +122,47 @@ int main(void)
 
   HAL_TIM_Encoder_Start(&htim1,TIM_CHANNEL_ALL);
 
-
   // Start the LCD
-  HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_SET);
-  LCD_init(LCD_CS_GPIO_Port, LCD_CS_Pin, LCD_DC_GPIO_Port, LCD_DC_Pin, hspi3);
-  MainMenu();
+//  HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_SET);
   // Start the synth
   Synth_Init();
 
 
 
   // Start the audio codec
+
   WM8978_Init();
 
+  PS_Communication_Interface comms;
+  comms.i2c = &hi2c2;
+  comms.i2s = &hi2s2;
+  comms.spi = &hspi3;
+  comms.uart = &huart1;
+
+  PS_Encoder_Timers enc;
+  enc.tim1 = &htim1;
+
+  LCD_GPIO lcd;
+  lcd.CEPORT = LCD_CS_GPIO_Port;
+  lcd.CEPIN = LCD_CS_Pin;
+  lcd.DCPORT = LCD_DC_GPIO_Port;
+  lcd.DCPIN = LCD_DC_Pin;
+  lcd.BLPORT = LCD_BL_GPIO_Port;
+  lcd.BLPIN = LCD_BL_Pin;
+  lcd.SPICH = &hspi3;
+
+  maincpp(&comms, &enc, &lcd);    /// we can't use c++ reference here
   /* USER CODE END 2 */
+
+
+
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    PS_Application();
-    timer1 = TIM1->CNT;
+    // PS_Application();
+    // timer1 = TIM1->CNT;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

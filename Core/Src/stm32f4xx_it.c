@@ -256,9 +256,9 @@ void EXTI15_10_IRQHandler(void)
     {
       sw1bon = true;
     }
-    TriggerENC1(sw1dir);
+    // TriggerENC1(sw1dir);
   }
-  MenuSelect();
+  // MenuSelect();
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_14);
