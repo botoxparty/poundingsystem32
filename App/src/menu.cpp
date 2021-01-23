@@ -1,5 +1,5 @@
 #include "main.h"
-#include "LCD.h"
+#include "lcd.h"
 #include "menu.h"
 
 int currentMenu = 0;

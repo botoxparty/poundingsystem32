@@ -2,7 +2,7 @@
 #ifndef _PS_MENU_
 #define _PS_MENU_
 
-#include "LCD.h"
+#include "lcd.h"
 #ifdef __cplusplus
 class MenuSystem
 {

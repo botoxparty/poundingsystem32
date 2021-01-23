@@ -41,8 +41,8 @@ App/src/menu.o: ../App/src/menu.cpp ../Core/Inc/main.h \
  ../Core/Inc/oscillators.h ../Core/Inc/blepvco.h \
  ../Core/Inc/minblep_tables.h ../Core/Inc/delay.h ../Core/Inc/chorusFD.h \
  ../Core/Inc/phaser.h ../Core/Inc/timers.h ../Core/Inc/audio_conf.h \
- ../Core/Inc/resonantFilter.h ../Core/Inc/adsr.h ../Core/Inc/wm8978.h \
- ../App/inc/LCD.h ../App/inc/font.h ../App/inc/menu.h ../App/inc/LCD.h
+ ../Core/Inc/resonantFilter.h ../Core/Inc/adsr.h ../App/inc/lcd.h \
+ ../App/inc/font.h ../App/inc/menu.h ../App/inc/lcd.h
 
 ../Core/Inc/main.h:
 
@@ -158,12 +158,10 @@ App/src/menu.o: ../App/src/menu.cpp ../Core/Inc/main.h \
 
 ../Core/Inc/adsr.h:
 
-../Core/Inc/wm8978.h:
-
-../App/inc/LCD.h:
+../App/inc/lcd.h:
 
 ../App/inc/font.h:
 
 ../App/inc/menu.h:
 
-../App/inc/LCD.h:
+../App/inc/lcd.h:

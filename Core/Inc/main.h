@@ -51,7 +51,7 @@ extern "C" {
 
 // #include "usbh_MIDI.h"
 // #include "wm8731.h"
-#include "wm8978.h"
+// #include "wm8978.h"
 #include "PS_application.h"
 #include "timers.h"
 #include "soundGen.h"

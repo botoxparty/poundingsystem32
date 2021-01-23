@@ -33,7 +33,16 @@ App/src/maincpp.o: ../App/src/maincpp.cpp ../App/inc/maincpp.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../App/inc/LCD.h ../App/inc/font.h ../App/inc/menu.h
+ ../App/inc/lcd.h ../App/inc/font.h ../App/inc/audiocodec.h \
+ ../App/inc/menu.h ../Core/Inc/PS_application.h \
+ ../Core/Inc/PS_interface.h ../Core/Inc/CONSTANTS.h ../Core/Inc/random.h \
+ ../Core/Inc/main.h ../Core/Inc/audio_conf.h ../Core/Inc/soundGen.h \
+ ../Core/Inc/PS_application.h ../Core/Inc/math_tools.h \
+ ../Core/Inc/sequencer.h ../Core/Inc/notesTables.h \
+ ../Core/Inc/oscillators.h ../Core/Inc/drifter.h ../Core/Inc/sinetable.h \
+ ../Core/Inc/blepvco.h ../Core/Inc/minblep_tables.h ../Core/Inc/delay.h \
+ ../Core/Inc/chorusFD.h ../Core/Inc/phaser.h ../Core/Inc/timers.h \
+ ../Core/Inc/audio_conf.h ../Core/Inc/resonantFilter.h ../Core/Inc/adsr.h
 
 ../App/inc/maincpp.h:
 
@@ -105,8 +114,56 @@ App/src/maincpp.o: ../App/src/maincpp.cpp ../App/inc/maincpp.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../App/inc/LCD.h:
+../App/inc/lcd.h:
 
 ../App/inc/font.h:
 
+../App/inc/audiocodec.h:
+
 ../App/inc/menu.h:
+
+../Core/Inc/PS_application.h:
+
+../Core/Inc/PS_interface.h:
+
+../Core/Inc/CONSTANTS.h:
+
+../Core/Inc/random.h:
+
+../Core/Inc/main.h:
+
+../Core/Inc/audio_conf.h:
+
+../Core/Inc/soundGen.h:
+
+../Core/Inc/PS_application.h:
+
+../Core/Inc/math_tools.h:
+
+../Core/Inc/sequencer.h:
+
+../Core/Inc/notesTables.h:
+
+../Core/Inc/oscillators.h:
+
+../Core/Inc/drifter.h:
+
+../Core/Inc/sinetable.h:
+
+../Core/Inc/blepvco.h:
+
+../Core/Inc/minblep_tables.h:
+
+../Core/Inc/delay.h:
+
+../Core/Inc/chorusFD.h:
+
+../Core/Inc/phaser.h:
+
+../Core/Inc/timers.h:
+
+../Core/Inc/audio_conf.h:
+
+../Core/Inc/resonantFilter.h:
+
+../Core/Inc/adsr.h:

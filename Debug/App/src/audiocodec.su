@@ -1,0 +1,13 @@
+audiocodec.cpp:24:10:uint16_t AudioCodec::Read_Reg(uint8_t)	0	static
+audiocodec.cpp:29:9:uint8_t AudioCodec::Write_Reg(uint8_t, uint16_t)	32	static
+audiocodec.cpp:100:6:void AudioCodec::ADDA_Cfg(uint8_t, uint8_t)	16	static
+audiocodec.cpp:142:6:void AudioCodec::MIC_Gain(uint8_t)	16	static
+audiocodec.cpp:151:6:void AudioCodec::LINEIN_Gain(uint8_t)	16	static
+audiocodec.cpp:164:6:void AudioCodec::AUX_Gain(uint8_t)	16	static
+audiocodec.cpp:117:6:void AudioCodec::Input_Cfg(uint8_t, uint8_t, uint8_t)	24	static
+audiocodec.cpp:179:6:void AudioCodec::Output_Cfg(uint8_t, uint8_t)	16	static
+audiocodec.cpp:194:6:void AudioCodec::HPvol_Set(uint8_t, uint8_t)	16	static
+audiocodec.cpp:210:6:void AudioCodec::SPKvol_Set(uint8_t)	16	static
+audiocodec.cpp:223:6:void AudioCodec::I2S_Cfg(uint8_t, uint8_t)	8	static
+audiocodec.cpp:58:9:uint8_t AudioCodec::Init()	16	static
+audiocodec.cpp:15:1:AudioCodec::AudioCodec(I2C_HandleTypeDef*, I2S_HandleTypeDef*, uint16_t*)	8	static

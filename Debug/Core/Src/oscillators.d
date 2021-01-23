@@ -41,7 +41,7 @@ Core/Src/oscillators.o: ../Core/Src/oscillators.c \
  ../Core/Inc/sequencer.h ../Core/Inc/oscillators.h ../Core/Inc/delay.h \
  ../Core/Inc/chorusFD.h ../Core/Inc/phaser.h ../Core/Inc/timers.h \
  ../Core/Inc/audio_conf.h ../Core/Inc/resonantFilter.h ../Core/Inc/adsr.h \
- ../Core/Inc/blepvco.h ../Core/Inc/minblep_tables.h ../Core/Inc/wm8978.h
+ ../Core/Inc/blepvco.h ../Core/Inc/minblep_tables.h
 
 ../Core/Inc/oscillators.h:
 
@@ -156,5 +156,3 @@ Core/Src/oscillators.o: ../Core/Src/oscillators.c \
 ../Core/Inc/blepvco.h:
 
 ../Core/Inc/minblep_tables.h:
-
-../Core/Inc/wm8978.h:

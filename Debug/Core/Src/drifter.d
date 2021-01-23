@@ -40,7 +40,7 @@ Core/Src/drifter.o: ../Core/Src/drifter.c ../Core/Inc/drifter.h \
  ../Core/Inc/sequencer.h ../Core/Inc/oscillators.h ../Core/Inc/blepvco.h \
  ../Core/Inc/minblep_tables.h ../Core/Inc/delay.h ../Core/Inc/chorusFD.h \
  ../Core/Inc/phaser.h ../Core/Inc/timers.h ../Core/Inc/audio_conf.h \
- ../Core/Inc/resonantFilter.h ../Core/Inc/adsr.h ../Core/Inc/wm8978.h
+ ../Core/Inc/resonantFilter.h ../Core/Inc/adsr.h
 
 ../Core/Inc/drifter.h:
 
@@ -155,5 +155,3 @@ Core/Src/drifter.o: ../Core/Src/drifter.c ../Core/Inc/drifter.h \
 ../Core/Inc/resonantFilter.h:
 
 ../Core/Inc/adsr.h:
-
-../Core/Inc/wm8978.h:

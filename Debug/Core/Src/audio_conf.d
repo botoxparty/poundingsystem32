@@ -35,13 +35,12 @@ Core/Src/audio_conf.o: ../Core/Src/audio_conf.c ../Core/Inc/audio_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/main.h ../Core/Inc/audio_conf.h ../Core/Inc/wm8978.h \
- ../Core/Inc/timers.h ../Core/Inc/delay.h ../Core/Inc/chorusFD.h \
- ../Core/Inc/sinetable.h ../Core/Inc/drifter.h \
- ../Core/Inc/resonantFilter.h ../Core/Inc/math_tools.h ../Core/Inc/adsr.h \
- ../Core/Inc/sequencer.h ../Core/Inc/notesTables.h \
- ../Core/Inc/oscillators.h ../Core/Inc/blepvco.h \
- ../Core/Inc/minblep_tables.h ../Core/Inc/phaser.h
+ ../Core/Inc/main.h ../Core/Inc/audio_conf.h ../Core/Inc/timers.h \
+ ../Core/Inc/delay.h ../Core/Inc/chorusFD.h ../Core/Inc/sinetable.h \
+ ../Core/Inc/drifter.h ../Core/Inc/resonantFilter.h \
+ ../Core/Inc/math_tools.h ../Core/Inc/adsr.h ../Core/Inc/sequencer.h \
+ ../Core/Inc/notesTables.h ../Core/Inc/oscillators.h \
+ ../Core/Inc/blepvco.h ../Core/Inc/minblep_tables.h ../Core/Inc/phaser.h
 
 ../Core/Inc/audio_conf.h:
 
@@ -126,8 +125,6 @@ Core/Src/audio_conf.o: ../Core/Src/audio_conf.c ../Core/Inc/audio_conf.h \
 ../Core/Inc/main.h:
 
 ../Core/Inc/audio_conf.h:
-
-../Core/Inc/wm8978.h:
 
 ../Core/Inc/timers.h:
 

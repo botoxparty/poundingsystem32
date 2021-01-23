@@ -4,8 +4,11 @@ extern "C"
 #endif
 
 #include "stm32f4xx_hal.h"
-#include "LCD.h"
+#include "lcd.h"
+#include "audiocodec.h"
+
 #include "menu.h"
+#include "PS_application.h"
 
     typedef struct
     {

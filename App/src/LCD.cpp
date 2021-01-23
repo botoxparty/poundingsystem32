@@ -1,4 +1,4 @@
-#include "LCD.h"
+#include "lcd.h"
 #include "stm32f4xx.h"
 
 LCD::LCD(LCD_GPIO* hgpio)
