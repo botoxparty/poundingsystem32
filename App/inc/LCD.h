@@ -7,15 +7,8 @@
 #include <stdbool.h>
 #include "font.h"
 #include "stm32f4xx_hal.h"
-
-#include "c64enh_font.h"
-#include "times_dig_16x24_font.h"
-#include "term9x14_font.h"
-#include "tiny3x7_font.h"
-#include "small4x7_font.h"
-#include "small5x7_font.h"
-#include "small5x7bold_font.h"
-
+#include "ascii_3.h"
+#include "ascii_4.h"
 
 extern "C"
 {
@@ -56,7 +49,6 @@ extern "C"
 	} LCD_GPIO;
 
 #ifdef __cplusplus
-
 	class LCD
 	{
 	public:
@@ -74,17 +66,10 @@ extern "C"
 		void drawRectangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
 		void refreshScr();
 		void setFont(const uint8_t *f);
- 		void setDigitMinWd(uint8_t wd) { minDigitWd = wd; }
-  		void setCharMinWd(uint8_t wd) { minCharWd = wd; }
+
 	private:
 		LCD_GPIO *gpio;
 		LCD_att display;
-		const uint8_t *font;
-		uint8_t minCharWd;
-		uint8_t minDigitWd;
-		uint8_t xSize;
-		uint8_t ySize;
-		uint8_t ySize8;
 		void init();
 		void send(uint8_t val);
 		void write(uint8_t data, uint8_t mode);
