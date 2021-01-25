@@ -1,1 +1,6 @@
-maincpp.cpp:10:5:int maincpp(PS_Communication_Interface*, PS_Encoder_Timers*, LCD_GPIO*)	544	static
+maincpp.cpp:102:1:void __static_initialization_and_destruction_0(int, int)	8	static
+maincpp.cpp:16:5:int maincpp(PS_Communication_Interface*, PS_Encoder_Timers*, LCD_GPIO*)	552	static
+maincpp.cpp:39:6:void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef*)	8	static
+maincpp.cpp:53:6:void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef*)	8	static
+maincpp.cpp:66:6:void EXTI15_10_IRQHandler()	8	static
+maincpp.cpp:102:1:cpp)	8	static

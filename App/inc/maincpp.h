@@ -8,7 +8,9 @@ extern "C"
 #include "audiocodec.h"
 
 #include "menu.h"
-#include "PS_application.h"
+// #include "PS_application.h"
+
+#include "synth.h"
 
     typedef struct
     {
@@ -24,6 +26,7 @@ extern "C"
     } PS_Encoder_Timers;
 
     int maincpp(PS_Communication_Interface *comms, PS_Encoder_Timers *enc, LCD_GPIO *lcdGpio);
+    void EXTI15_10_IRQHandler(void);
 
 #ifdef __cplusplus
 }

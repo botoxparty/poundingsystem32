@@ -10,4 +10,4 @@ audiocodec.cpp:194:6:void AudioCodec::HPvol_Set(uint8_t, uint8_t)	16	static
 audiocodec.cpp:210:6:void AudioCodec::SPKvol_Set(uint8_t)	16	static
 audiocodec.cpp:223:6:void AudioCodec::I2S_Cfg(uint8_t, uint8_t)	8	static
 audiocodec.cpp:58:9:uint8_t AudioCodec::Init()	16	static
-audiocodec.cpp:15:1:AudioCodec::AudioCodec(I2C_HandleTypeDef*, I2S_HandleTypeDef*, uint16_t*)	8	static
+audiocodec.cpp:16:1:AudioCodec::AudioCodec(I2C_HandleTypeDef*, I2S_HandleTypeDef*)	8	static

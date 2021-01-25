@@ -31,10 +31,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-bool sw1aon;
-bool sw1bon;
-bool sw1dir;
-uint16_t sw1counter = 0;
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -219,7 +216,7 @@ void DMA1_Stream4_IRQHandler(void)
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-  TriggerSound();
+  // TriggerSound();
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7);
   /* USER CODE BEGIN EXTI9_5_IRQn 1 */
@@ -230,43 +227,7 @@ void EXTI9_5_IRQHandler(void)
 /**
   * @brief This function handles EXTI line[15:10] interrupts.
   */
-void EXTI15_10_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI15_10_IRQn 0 */
-  if (__HAL_GPIO_EXTI_GET_FLAG(GPIO_PIN_13))
-  { // SW1_A
-    if (sw1bon)
-    {
-      sw1dir = true;
-      sw1bon = false;
-    }
-    else
-    {
-      sw1aon = true;
-    }
-  }
-  if (__HAL_GPIO_EXTI_GET_FLAG(GPIO_PIN_14))
-  { // SW1_B
-    if (sw1aon)
-    {
-      sw1dir = false;
-      sw1aon = false;
-    }
-    else
-    {
-      sw1bon = true;
-    }
-    // TriggerENC1(sw1dir);
-  }
-  // MenuSelect();
-  /* USER CODE END EXTI15_10_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_14);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_15);
-  /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
-  /* USER CODE END EXTI15_10_IRQn 1 */
-}
 
 /* USER CODE BEGIN 1 */
 

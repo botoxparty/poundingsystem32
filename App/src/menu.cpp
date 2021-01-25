@@ -4,7 +4,7 @@
 
 int currentMenu = 0;
 int menuCount = 3;
-
+bool submenu;
 int activeItem = 0;
 int activeItemCount = 3;
 
@@ -19,6 +19,25 @@ MenuSystem::MenuSystem(LCD *hlcd)
   */
 void MenuSystem::MainMenu()
 {
+    if (submenu)
+    {
+        switch (activeItem)
+        {
+        case 0:
+            lcd->clrScr();
+            lcd->print("SINE", 0, 0);
+            lcd->print("SINE2", 0, 1);
+            lcd->refreshScr();
+            break;
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        }
+        return;
+    }
     lcd->drawHLine(0, 8, 83);
     lcd->refreshScr();
     if (activeItem == 0)
@@ -57,23 +76,21 @@ void MenuSystem::MainMenu()
     }
 }
 
-void MenuSelect(void)
+void MenuSystem::NextMenu(void)
+{
+    currentMenu = currentMenu + 1;
+    MenuSelect();
+}
+
+void MenuSystem::MenuSelect(void)
 {
     switch (currentMenu)
     {
     case 0:
-        switch (activeItem)
-        {
-        case 0:
-            // SoundMenu();
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        default:
-            break;
-        }
+        MainMenu();
+        break;
+    case 1:
+        MixerMenu();
         break;
     default:
         break;
@@ -89,7 +106,7 @@ void SoundMenu(void)
 /**
   * @brief Main Menu
   */
-void MixerMenu(LCD *lcd)
+void MenuSystem::MixerMenu()
 {
     // char spk[4];
 
@@ -142,13 +159,13 @@ void BlankPage(LCD *lcd)
 /**
   * @brief Go to next/prev menu page.
   */
-void TriggerENC1(bool direction)
+void MenuSystem::TriggerEncoder(bool direction)
 {
 
     if (direction)
     {
         activeItem++;
-        if (activeItem > activeItemCount)
+        if (activeItem > activeItemCount - 1)
         {
             activeItem = 0;
         }
@@ -162,19 +179,11 @@ void TriggerENC1(bool direction)
         }
     }
 
-    switch (currentMenu)
-    {
-    case 0:
-        // MainMenu();
-        break;
-    case 1:
-        // MixerMenu();
-        break;
-    case 2:
-        // DelayMenu();
-        break;
-    default:
-        // BlankPage();
-        break;
-    }
+    MenuSelect();
+}
+
+void MenuSystem::TriggerPushEncoder()
+{
+    submenu = !submenu;
+    MenuSelect();
 }

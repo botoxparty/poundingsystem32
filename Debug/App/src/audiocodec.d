@@ -1,4 +1,4 @@
-App/src/audiocodec.o: ../App/src/audiocodec.cpp ../App/inc/audiocodec.h \
+App/Src/audiocodec.o: ../App/Src/audiocodec.cpp ../App/Inc/audiocodec.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
@@ -34,7 +34,7 @@ App/src/audiocodec.o: ../App/src/audiocodec.cpp ../App/inc/audiocodec.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 
-../App/inc/audiocodec.h:
+../App/Inc/audiocodec.h:
 
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 

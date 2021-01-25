@@ -7,6 +7,16 @@
 #include <stdbool.h>
 #include "font.h"
 #include "stm32f4xx_hal.h"
+
+#include "c64enh_font.h"
+#include "times_dig_16x24_font.h"
+#include "term9x14_font.h"
+#include "tiny3x7_font.h"
+#include "small4x7_font.h"
+#include "small5x7_font.h"
+#include "small5x7bold_font.h"
+
+
 extern "C"
 {
 #endif
@@ -50,7 +60,7 @@ extern "C"
 	class LCD
 	{
 	public:
-		LCD(LCD_GPIO* hgpio);
+		LCD(LCD_GPIO *hgpio);
 		void print(char *str, uint8_t x, uint8_t y);
 		void clrScr();
 		void goXY(uint8_t x, uint8_t y);
@@ -63,10 +73,18 @@ extern "C"
 		void drawLine(int x1, int y1, int x2, int y2);
 		void drawRectangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2);
 		void refreshScr();
-
+		void setFont(const uint8_t *f);
+ 		void setDigitMinWd(uint8_t wd) { minDigitWd = wd; }
+  		void setCharMinWd(uint8_t wd) { minCharWd = wd; }
 	private:
-		LCD_GPIO* gpio;
+		LCD_GPIO *gpio;
 		LCD_att display;
+		const uint8_t *font;
+		uint8_t minCharWd;
+		uint8_t minDigitWd;
+		uint8_t xSize;
+		uint8_t ySize;
+		uint8_t ySize8;
 		void init();
 		void send(uint8_t val);
 		void write(uint8_t data, uint8_t mode);

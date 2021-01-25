@@ -645,10 +645,12 @@
 
 #ifdef __cplusplus
 
+extern uint16_t audiobuff[BUFF_LEN];
+
 class AudioCodec
 {
 public:
-    AudioCodec(I2C_HandleTypeDef* hi2c, I2S_HandleTypeDef* hi2s, uint16_t* audiobuff);
+    AudioCodec(I2C_HandleTypeDef* hi2c, I2S_HandleTypeDef* hi2s);
     uint8_t HP_Volume;
     uint8_t SPK_Volume;
     void HPvol_Set(uint8_t voll, uint8_t volr);

@@ -1,6 +1,7 @@
 #include "audiocodec.h"
 #include "stm32f4xx_hal.h"
 
+
 static uint16_t WM8978_REGVAL[58] =
     {
         0X0000, 0X0000, 0X0000, 0X0000, 0X0050, 0X0000, 0X0140, 0X0000,
@@ -12,12 +13,11 @@ static uint16_t WM8978_REGVAL[58] =
         0X0100, 0X0002, 0X0001, 0X0001, 0X0039, 0X0039, 0X0039, 0X0039,
         0X0001, 0X0001};
 
-AudioCodec::AudioCodec(I2C_HandleTypeDef *hi2c, I2S_HandleTypeDef *hi2s, uint16_t *audiobuff)
+AudioCodec::AudioCodec(I2C_HandleTypeDef *hi2c, I2S_HandleTypeDef *hi2s)
 {
 
     i2c = hi2c;
     i2s = hi2s;
-    buffer = audiobuff;
     Init();
 }
 
@@ -93,7 +93,7 @@ uint8_t AudioCodec::Init(void)
     HPvol_Set(HP_Volume, HP_Volume);
     SPKvol_Set(SPK_Volume);
 
-    HAL_I2S_Transmit_DMA(i2s, (uint16_t *)&buffer[0], DMA_MAX((2 * BUFF_LEN) / AUDIODATA_SIZE)); // size must be in bytes
+    HAL_I2S_Transmit_DMA(i2s, (uint16_t *)&audiobuff[0], DMA_MAX((2 * BUFF_LEN) / AUDIODATA_SIZE)); // size must be in bytes
     return 0;
 }
 

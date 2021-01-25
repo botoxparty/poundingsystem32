@@ -1,0 +1,2 @@
+oscillator.cpp:3:1:Oscillator::Oscillator(float_t, float_t)	0	static
+oscillator.cpp:11:6:void Oscillator::Init()	0	static

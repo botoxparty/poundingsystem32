@@ -32,8 +32,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "CONSTANTS.h"
-#include "audio_conf.h"
+// #include "CONSTANTS.h"
+// #include "audio_conf.h"
 
 #include <math.h>
 #include <stdlib.h>
@@ -52,17 +52,18 @@ extern "C" {
 // #include "usbh_MIDI.h"
 // #include "wm8731.h"
 // #include "wm8978.h"
-#include "PS_application.h"
-#include "timers.h"
-#include "soundGen.h"
-#include "delay.h"
-#include "chorusFD.h"
-#include "random.h"
+
+// #include "PS_application.h"
+// #include "timers.h"
+// #include "soundGen.h"
+// #include "delay.h"
+// #include "chorusFD.h"
+// #include "random.h"
 // #include "CONSTANTS.h"
-#include "drifter.h"
-#include "resonantFilter.h"
-#include "adsr.h"
-#include "sequencer.h"
+// #include "drifter.h"
+// #include "resonantFilter.h"
+// #include "adsr.h"
+// #include "sequencer.h"
 
 /* USER CODE END Includes */
 

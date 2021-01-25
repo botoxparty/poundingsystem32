@@ -41,7 +41,7 @@ int nLoop = 0;
 bool demoMode = true;
 bool freeze = false;
 bool sequencerIsOn = false;
-extern ADSR_t adsr;
+//extern ADSR_t adsr;
 
 /* USER CODE END PD */
 
@@ -123,7 +123,7 @@ int main(void)
   HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
 
   // Start the synth
-  Synth_Init();
+  // Synth_Init();
 
 
   PS_Communication_Interface comms;

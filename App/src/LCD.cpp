@@ -1,7 +1,7 @@
 #include "lcd.h"
 #include "stm32f4xx.h"
 
-LCD::LCD(LCD_GPIO* hgpio)
+LCD::LCD(LCD_GPIO *hgpio)
 {
     if (hgpio == 0x00)
     {
@@ -58,9 +58,9 @@ void LCD::putChar(char c)
     for (int i = 0; i < 6; i++)
     {
         if (display.inverttext != true)
-            write(ASCII[c - 0x20][i], LCD_DATA);
+            write(Tiny3x7PL[c - 0x20], LCD_DATA);
         else
-            write(~(ASCII[c - 0x20][i]), LCD_DATA);
+            write(~(Tiny3x7PL[c - 0x20]), LCD_DATA);
     }
 }
 void LCD::invert(bool mode)
@@ -89,7 +89,28 @@ void LCD::init()
     write(LCD_DISPLAY_NORMAL, LCD_COMMAND); //LCD normal.
     clrScr();
     display.inverttext = false;
+
+    font = NULL;
+
+    setFont(Small5x7PLBold);
+    setDigitMinWd(4);
 }
+
+void LCD::setFont(const uint8_t *f)
+{
+    font = f;
+    xSize = font[0];
+    ySize = font[1];
+    // firstCh = font[2];
+    // lastCh = font[3];
+    ySize8 = (ySize + 7) / 8;
+    minCharWd = 0;
+    minDigitWd = 0;
+    // cr = 0;
+    // invertCh = 0;
+    // invertMask = 0xff;
+}
+
 void LCD::send(uint8_t val)
 {
     HAL_SPI_Transmit(gpio->SPICH, &val, 0x01, 1000);

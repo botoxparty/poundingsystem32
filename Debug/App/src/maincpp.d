@@ -1,4 +1,4 @@
-App/src/maincpp.o: ../App/src/maincpp.cpp ../App/inc/maincpp.h \
+App/Src/maincpp.o: ../App/Src/maincpp.cpp ../App/Inc/maincpp.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -33,18 +33,15 @@ App/src/maincpp.o: ../App/src/maincpp.cpp ../App/inc/maincpp.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../App/inc/lcd.h ../App/inc/font.h ../App/inc/audiocodec.h \
- ../App/inc/menu.h ../Core/Inc/PS_application.h \
- ../Core/Inc/PS_interface.h ../Core/Inc/CONSTANTS.h ../Core/Inc/random.h \
- ../Core/Inc/main.h ../Core/Inc/audio_conf.h ../Core/Inc/soundGen.h \
- ../Core/Inc/PS_application.h ../Core/Inc/math_tools.h \
- ../Core/Inc/sequencer.h ../Core/Inc/notesTables.h \
- ../Core/Inc/oscillators.h ../Core/Inc/drifter.h ../Core/Inc/sinetable.h \
- ../Core/Inc/blepvco.h ../Core/Inc/minblep_tables.h ../Core/Inc/delay.h \
- ../Core/Inc/chorusFD.h ../Core/Inc/phaser.h ../Core/Inc/timers.h \
- ../Core/Inc/audio_conf.h ../Core/Inc/resonantFilter.h ../Core/Inc/adsr.h
+ ../App/Inc/lcd.h ../App/Inc/font.h ../App/Inc/c64enh_font.h \
+ ../App/Inc/times_dig_16x24_font.h ../App/Inc/term9x14_font.h \
+ ../App/Inc/tiny3x7_font.h ../App/Inc/small4x7_font.h \
+ ../App/Inc/small5x7_font.h ../App/Inc/small5x7bold_font.h \
+ ../App/Inc/audiocodec.h ../App/Inc/menu.h ../Synth/Inc/synth.h \
+ ../Synth/Inc/oscillator.h ../Synth/Inc/soundgenerator.h \
+ ../App/Inc/sinetable.h ../Core/Inc/notesTables.h ../App/Inc/audiocodec.h
 
-../App/inc/maincpp.h:
+../App/Inc/maincpp.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -114,56 +111,36 @@ App/src/maincpp.o: ../App/src/maincpp.cpp ../App/inc/maincpp.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../App/inc/lcd.h:
+../App/Inc/lcd.h:
 
-../App/inc/font.h:
+../App/Inc/font.h:
 
-../App/inc/audiocodec.h:
+../App/Inc/c64enh_font.h:
 
-../App/inc/menu.h:
+../App/Inc/times_dig_16x24_font.h:
 
-../Core/Inc/PS_application.h:
+../App/Inc/term9x14_font.h:
 
-../Core/Inc/PS_interface.h:
+../App/Inc/tiny3x7_font.h:
 
-../Core/Inc/CONSTANTS.h:
+../App/Inc/small4x7_font.h:
 
-../Core/Inc/random.h:
+../App/Inc/small5x7_font.h:
 
-../Core/Inc/main.h:
+../App/Inc/small5x7bold_font.h:
 
-../Core/Inc/audio_conf.h:
+../App/Inc/audiocodec.h:
 
-../Core/Inc/soundGen.h:
+../App/Inc/menu.h:
 
-../Core/Inc/PS_application.h:
+../Synth/Inc/synth.h:
 
-../Core/Inc/math_tools.h:
+../Synth/Inc/oscillator.h:
 
-../Core/Inc/sequencer.h:
+../Synth/Inc/soundgenerator.h:
+
+../App/Inc/sinetable.h:
 
 ../Core/Inc/notesTables.h:
 
-../Core/Inc/oscillators.h:
-
-../Core/Inc/drifter.h:
-
-../Core/Inc/sinetable.h:
-
-../Core/Inc/blepvco.h:
-
-../Core/Inc/minblep_tables.h:
-
-../Core/Inc/delay.h:
-
-../Core/Inc/chorusFD.h:
-
-../Core/Inc/phaser.h:
-
-../Core/Inc/timers.h:
-
-../Core/Inc/audio_conf.h:
-
-../Core/Inc/resonantFilter.h:
-
-../Core/Inc/adsr.h:
+../App/Inc/audiocodec.h:
