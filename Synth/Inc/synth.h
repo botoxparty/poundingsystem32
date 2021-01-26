@@ -36,7 +36,7 @@ public:
     float env;
     int currentNote;
     int velocity;
-    enum timbre sound;
+    Sounds sound;
     float generate_waveform(float freq);
     void make_sound(uint16_t *buf, uint16_t length);
     Oscillator osc1;

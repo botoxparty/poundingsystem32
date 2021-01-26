@@ -53,6 +53,8 @@ void LCD::drawBitmap(int x, int y, uint8_t *bitmap, int sx, int sy)
 
     // refreshScr();
 }
+
+
 void LCD::putChar(char c)
 {
     for (int i = 0; i < 6; i++)

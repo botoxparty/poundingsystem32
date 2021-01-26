@@ -1,6 +1,5 @@
 #include "synth.h"
 
-
 // Define the static Singleton pointer
 Synth *Synth::inst_ = NULL;
 
@@ -21,7 +20,7 @@ Synth::Synth()
 {
     static float f0 _CCM_;
     vol = env = 1;
-    sound = WT_SINE;
+    sound = SINE;
     autoFilterON = false;
     autoSound = 0;
     chorusON = false;
@@ -154,7 +153,15 @@ float Synth::generate_waveform(float freq)
     // Set osc1 frequency
     osc1.freq = freq;
 
-    y = SoundGenerator::Sine(&osc1);
+    switch (sound)
+    {
+    case SINE:
+        y = SoundGenerator::Sine(&osc1);
+        break;
+    default:
+        y = SoundGenerator::SineTable(&osc1);
+        break;
+    }
 
     // /* choose waveform generator */
     // switch (sound)

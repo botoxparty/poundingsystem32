@@ -3,6 +3,7 @@
 #define _PS_MENU_
 
 #include "lcd.h"
+#include "synth.h"
 
 #ifdef __cplusplus
 
@@ -13,6 +14,8 @@ enum PSMenus
     SOUND_MENU,
     DELAY_MENU
 };
+
+extern Synth *synth;
 
 class MenuSystem
 {

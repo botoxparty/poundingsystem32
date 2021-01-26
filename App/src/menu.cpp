@@ -2,8 +2,7 @@
 #include "lcd.h"
 #include "menu.h"
 #include "audiocodec.h"
-#include <vector>
-#include <string>
+#include "soundgenerator.h"
 /**
  *
  * Menus:
@@ -20,9 +19,21 @@ int menuCount = 3;
 int activeItem = 0;
 int activeItemCount = 3;
 bool scrollMode = false;
+bool looping = true;
 
 extern uint8_t WM8978_SPK_Volume;
 extern AudioCodec *audio;
+
+char *intToChar(int i)
+{
+    int length = (log10(i) + 1);
+
+    char chararray[length];
+    sprintf(chararray, "%d", i);
+    chararray[length] = '\0';
+
+    return chararray;
+}
 
 MenuSystem::MenuSystem(LCD *hlcd)
 {
@@ -87,12 +98,16 @@ void MenuSystem::MenuSelect(void)
     case MAIN_MENU:
         if (activeItem == 2)
         {
+            activeItem = synth->sound;
             SetMenu(SOUND_MENU);
             return;
         }
+        break;
     case SOUND_MENU:
+        synth->sound = Sounds(activeItem);
         activeItem = 2;
         SetMenu(MAIN_MENU);
+        break;
     default:
         break;
     }
@@ -127,7 +142,6 @@ void MenuSystem::MenuSelect(void)
   */
 void MenuSystem::TriggerEncoder(bool direction)
 {
-
     if (scrollMode)
     {
         int newmenu = (int)currentMenu;
@@ -158,7 +172,7 @@ void MenuSystem::TriggerEncoder(bool direction)
         activeItem++;
         if (activeItem > activeItemCount - 1)
         {
-            activeItem = 0;
+            activeItem = looping ? 0 : activeItemCount - 1;
         }
     }
     else
@@ -166,7 +180,7 @@ void MenuSystem::TriggerEncoder(bool direction)
         activeItem--;
         if (activeItem < 0)
         {
-            activeItem = activeItemCount - 1;
+            activeItem = looping ? activeItemCount - 1 : 0;
         }
     }
     RefreshMenu();
@@ -183,10 +197,11 @@ void MenuSystem::TriggerPushEncoder()
 void MenuSystem::MainMenu()
 {
     currentMenu = MAIN_MENU;
+    activeItemCount = 3;
     switch (activeItem)
     {
     case 0:
-        lcd->print("SINE", 0, 0);
+        lcd->print(SoundGenerator::soundNames[synth->sound], 0, 0);
         lcd->print("Freq       440", 0, 1);
         lcd->print("Mod        100", 0, 2);
         lcd->print("Rate      1200", 0, 3);
@@ -197,7 +212,7 @@ void MenuSystem::MainMenu()
         lcd->invertText(false);
         break;
     case 1:
-        lcd->print("SINE", 0, 0);
+        lcd->print(SoundGenerator::soundNames[synth->sound], 0, 0);
         lcd->print("Freq       440", 0, 1);
         lcd->print("Mod        100", 0, 2);
         lcd->print("Rate      1200", 0, 3);
@@ -209,7 +224,7 @@ void MenuSystem::MainMenu()
         break;
     case 2:
         lcd->invertText(true);
-        lcd->print("SINE", 0, 0);
+        lcd->print(SoundGenerator::soundNames[synth->sound], 0, 0);
         lcd->invertText(false);
         lcd->print("Freq       440", 0, 1);
         lcd->print("Mod        100", 0, 2);
@@ -229,13 +244,6 @@ void MenuSystem::MixerMenu()
 {
     currentMenu = MIXER_MENU;
 
-    char hp[4];
-    sprintf(hp, "%d", audio->HP_Volume);
-    hp[4] = '\0';
-    char spk[4];
-    sprintf(spk, "%d", audio->SPK_Volume);
-    spk[4] = '\0';
-
     lcd->drawHLine(0, 9, 83);
     lcd->refreshScr();
 
@@ -244,9 +252,9 @@ void MenuSystem::MixerMenu()
     lcd->invertText(false);
     lcd->print("MIXER        ", 0, 0);
     lcd->print("Headphones   ", 0, 2);
-    lcd->print(hp, 60, 1);
+    lcd->print(intToChar(audio->HP_Volume), 60, 1);
     lcd->print("LineOut      ", 0, 3);
-    lcd->print(spk, 60, 2);
+    lcd->print(intToChar(audio->SPK_Volume), 60, 2);
     lcd->print("LineIn      --", 0, 4);
     lcd->print("Mic         --", 0, 5);
 }
@@ -256,15 +264,23 @@ void MenuSystem::MixerMenu()
 void MenuSystem::SoundMenu()
 {
     currentMenu = SOUND_MENU;
-    char colour[4][10] = {"Blue", "Red", "Orange",
-                          "Yellow"};
+    looping = false;
+
+    activeItemCount = SoundGenerator::soundscount;
+
     lcd->drawHLine(0, 8, 83);
     lcd->refreshScr();
     lcd->print("SOUND        X", 0, 0);
 
-    for (int i = 0; i < 3; i++)
+    for (int i = activeItem < 5 ? 0 : activeItem - 4, j = 1; j < 6; i++, j++)
     {
-        lcd->print(colour[i], 0, i + 1);
+    	if(i == activeItem) {
+    		lcd->invertText(true);
+    	}
+        lcd->print(SoundGenerator::soundNames[i], 0, j);
+    	if(i == activeItem) {
+    		lcd->invertText(false);
+    	}
     }
 }
 

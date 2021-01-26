@@ -1,5 +1,5 @@
-synth.cpp:20:1:Synth::Synth()	48	static
-synth.cpp:11:8:static Synth* Synth::getInstance()	8	static
-synth.cpp:35:6:void Synth::Init()	0	static
-synth.cpp:61:6:void Synth::make_sound(uint16_t*, uint16_t)	32	static
-synth.cpp:150:7:float Synth::generate_waveform(float)	8	static
+synth.cpp:19:1:Synth::Synth()	48	static
+synth.cpp:10:8:static Synth* Synth::getInstance()	8	static
+synth.cpp:34:6:void Synth::Init()	0	static
+synth.cpp:149:7:float Synth::generate_waveform(float)	8	static
+synth.cpp:60:6:void Synth::make_sound(uint16_t*, uint16_t)	32	static

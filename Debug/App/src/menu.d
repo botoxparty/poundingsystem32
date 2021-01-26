@@ -35,7 +35,10 @@ App/Src/menu.o: ../App/Src/menu.cpp ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../App/Inc/lcd.h ../App/Inc/ascii.h ../App/Inc/ascii_3.h \
  ../App/Inc/ascii_4.h ../App/Inc/menu.h ../App/Inc/lcd.h \
- ../App/Inc/audiocodec.h
+ ../Synth/Inc/synth.h ../Synth/Inc/oscillator.h \
+ ../Synth/Inc/soundgenerator.h ../App/Inc/sinetable.h \
+ ../Core/Inc/notesTables.h ../App/Inc/audiocodec.h \
+ ../Synth/Inc/soundgenerator.h
 
 ../Core/Inc/main.h:
 
@@ -119,4 +122,16 @@ App/Src/menu.o: ../App/Src/menu.cpp ../Core/Inc/main.h \
 
 ../App/Inc/lcd.h:
 
+../Synth/Inc/synth.h:
+
+../Synth/Inc/oscillator.h:
+
+../Synth/Inc/soundgenerator.h:
+
+../App/Inc/sinetable.h:
+
+../Core/Inc/notesTables.h:
+
 ../App/Inc/audiocodec.h:
+
+../Synth/Inc/soundgenerator.h:

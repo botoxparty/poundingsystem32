@@ -1,10 +1,11 @@
-menu.cpp:27:1:MenuSystem::MenuSystem(LCD*)	0	static
-menu.cpp:183:6:void MenuSystem::MainMenu()	8	static
-menu.cpp:228:6:void MenuSystem::MixerMenu()	40	static
-menu.cpp:256:6:void MenuSystem::SoundMenu()	56	static
-menu.cpp:274:6:void MenuSystem::DelayMenu()	8	static
-menu.cpp:35:6:void MenuSystem::RefreshMenu()	8	static
-menu.cpp:66:6:void MenuSystem::SetMenu(PSMenus)	8	static
-menu.cpp:72:6:void MenuSystem::MenuSelect()	8	static
-menu.cpp:175:6:void MenuSystem::TriggerPushEncoder()	8	static
-menu.cpp:128:6:void MenuSystem::TriggerEncoder(bool)	8	static
+menu.cpp:27:7:char* intToChar(int)	16	dynamic
+menu.cpp:38:1:MenuSystem::MenuSystem(LCD*)	0	static
+menu.cpp:197:6:void MenuSystem::MainMenu()	8	static
+menu.cpp:243:6:void MenuSystem::MixerMenu()	24	static
+menu.cpp:264:6:void MenuSystem::SoundMenu()	16	static
+menu.cpp:290:6:void MenuSystem::DelayMenu()	8	static
+menu.cpp:46:6:void MenuSystem::RefreshMenu()	8	static
+menu.cpp:77:6:void MenuSystem::SetMenu(PSMenus)	8	static
+menu.cpp:83:6:void MenuSystem::MenuSelect()	8	static
+menu.cpp:189:6:void MenuSystem::TriggerPushEncoder()	8	static
+menu.cpp:143:6:void MenuSystem::TriggerEncoder(bool)	8	static
