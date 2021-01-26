@@ -33,13 +33,11 @@ App/Src/maincpp.o: ../App/Src/maincpp.cpp ../App/Inc/maincpp.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../App/Inc/lcd.h ../App/Inc/font.h ../App/Inc/c64enh_font.h \
- ../App/Inc/times_dig_16x24_font.h ../App/Inc/term9x14_font.h \
- ../App/Inc/tiny3x7_font.h ../App/Inc/small4x7_font.h \
- ../App/Inc/small5x7_font.h ../App/Inc/small5x7bold_font.h \
- ../App/Inc/audiocodec.h ../App/Inc/menu.h ../Synth/Inc/synth.h \
- ../Synth/Inc/oscillator.h ../Synth/Inc/soundgenerator.h \
- ../App/Inc/sinetable.h ../Core/Inc/notesTables.h ../App/Inc/audiocodec.h
+ ../App/Inc/lcd.h ../App/Inc/ascii.h ../App/Inc/ascii_3.h \
+ ../App/Inc/ascii_4.h ../App/Inc/audiocodec.h ../App/Inc/menu.h \
+ ../Synth/Inc/synth.h ../Synth/Inc/oscillator.h \
+ ../Synth/Inc/soundgenerator.h ../App/Inc/sinetable.h \
+ ../Core/Inc/notesTables.h ../App/Inc/audiocodec.h
 
 ../App/Inc/maincpp.h:
 
@@ -113,21 +111,11 @@ App/Src/maincpp.o: ../App/Src/maincpp.cpp ../App/Inc/maincpp.h \
 
 ../App/Inc/lcd.h:
 
-../App/Inc/font.h:
+../App/Inc/ascii.h:
 
-../App/Inc/c64enh_font.h:
+../App/Inc/ascii_3.h:
 
-../App/Inc/times_dig_16x24_font.h:
-
-../App/Inc/term9x14_font.h:
-
-../App/Inc/tiny3x7_font.h:
-
-../App/Inc/small4x7_font.h:
-
-../App/Inc/small5x7_font.h:
-
-../App/Inc/small5x7bold_font.h:
+../App/Inc/ascii_4.h:
 
 ../App/Inc/audiocodec.h:
 

@@ -9,6 +9,7 @@
 uint16_t audiobuff[BUFF_LEN];
 Synth *synth = Synth::getInstance();
 MenuSystem *menu;
+AudioCodec *audio;
 bool sw1aon;
 bool sw1bon;
 bool sw1dir;
@@ -19,7 +20,8 @@ int maincpp(PS_Communication_Interface *comms, PS_Encoder_Timers *enc, LCD_GPIO 
   LCD lcd(lcdGpio);
   MenuSystem m(&lcd);
   menu = &m;
-  AudioCodec audio(comms->i2c, comms->i2s);
+  AudioCodec a(comms->i2c, comms->i2s);
+  audio = &a;
 
   menu->MainMenu();
 
@@ -91,7 +93,7 @@ void EXTI15_10_IRQHandler(void)
     }
     menu->TriggerEncoder(sw1dir);
   }
-  if (__HAL_GPIO_EXTI_GET_FLAG(GPIO_PIN_14))
+  if (__HAL_GPIO_EXTI_GET_FLAG(GPIO_PIN_15))
   {
     menu->TriggerPushEncoder();
   }

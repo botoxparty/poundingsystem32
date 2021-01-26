@@ -1,6 +1,0 @@
-math_tools.c:29:7:approx_exp	0	static
-math_tools.c:42:7:Lin2Exp	16	static
-math_tools.c:48:7:tanhXdX	0	static
-math_tools.c:57:7:fastTanh	0	static
-math_tools.c:64:8:softClipTwo	8	static
-math_tools.c:69:8:fastTan	0	static

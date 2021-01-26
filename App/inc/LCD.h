@@ -5,8 +5,10 @@
 #ifdef __cplusplus
 
 #include <stdbool.h>
-#include "font.h"
 #include "stm32f4xx_hal.h"
+
+// Fonts
+#include "ascii.h"
 #include "ascii_3.h"
 #include "ascii_4.h"
 

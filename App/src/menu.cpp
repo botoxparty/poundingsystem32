@@ -1,159 +1,125 @@
 #include "main.h"
 #include "lcd.h"
 #include "menu.h"
+#include "audiocodec.h"
+#include <vector>
+#include <string>
+/**
+ *
+ * Menus:
+ * 0 main menu
+ * 1 mixer menu
+ * 2 sound menu
+ * 3 delay menu
+ *
+ *
+ */
 
-int currentMenu = 0;
+PSMenus currentMenu = MAIN_MENU;
 int menuCount = 3;
-bool submenu;
 int activeItem = 0;
 int activeItemCount = 3;
+bool scrollMode = false;
 
 extern uint8_t WM8978_SPK_Volume;
+extern AudioCodec *audio;
 
 MenuSystem::MenuSystem(LCD *hlcd)
 {
     lcd = hlcd;
 }
+
 /**
-  * @brief Main Menu
+  * @brief Load the current state onto the display
   */
-void MenuSystem::MainMenu()
+void MenuSystem::RefreshMenu(void)
 {
-    if (submenu)
+    lcd->clrScr();
+    switch (currentMenu)
     {
-        switch (activeItem)
-        {
-        case 0:
-            lcd->clrScr();
-            lcd->print("SINE", 0, 0);
-            lcd->print("SINE2", 0, 1);
-            lcd->refreshScr();
-            break;
-        case 1:
-
-            break;
-        case 2:
-
-            break;
-        }
-        return;
+    case MAIN_MENU:
+        MainMenu();
+        break;
+    case MIXER_MENU:
+        MixerMenu();
+        break;
+    case SOUND_MENU:
+        SoundMenu();
+        break;
+    case DELAY_MENU:
+        DelayMenu();
+    default:
+        break;
     }
-    lcd->drawHLine(0, 8, 83);
-    lcd->refreshScr();
-    if (activeItem == 0)
+
+    if (scrollMode)
     {
         lcd->invertText(true);
-        lcd->print("SINE", 0, 0);
+        lcd->print("<            >", 0, 5);
         lcd->invertText(false);
-    }
-    else
-    {
-        lcd->print("SINE", 0, 0);
-    }
-    //  lcd->goXY(0,20);
-    lcd->print("Freq       440", 0, 1);
-    lcd->print("Mod        100", 0, 2);
-    lcd->print("Rate      1200", 0, 3);
-    lcd->print("- - - -       ", 0, 4);
-
-    if (activeItem == 1)
-    {
-        lcd->print("         MIXER", 0, 5);
-        lcd->invertText(true);
-        lcd->print("<  >", 0, 5);
-        lcd->invertText(false);
-    }
-    else if (activeItem == 2)
-    {
-        lcd->print("<  >", 0, 5);
-        lcd->invertText(true);
-        lcd->print("MIXER", 54, 5);
-        lcd->invertText(false);
-    }
-    else
-    {
-        lcd->print("<  >     MIXER", 0, 5);
     }
 }
 
-void MenuSystem::NextMenu(void)
+/**
+  * @brief Load the current state onto the display
+  */
+void MenuSystem::SetMenu(PSMenus menu)
 {
-    currentMenu = currentMenu + 1;
-    MenuSelect();
+    currentMenu = menu;
+    RefreshMenu();
 }
 
 void MenuSystem::MenuSelect(void)
 {
+    if (scrollMode)
+    {
+        scrollMode = false;
+        RefreshMenu();
+        return;
+    }
     switch (currentMenu)
     {
-    case 0:
-        MainMenu();
+    case MIXER_MENU:
+        activeItem = 1;
+        SetMenu(MAIN_MENU);
+        return;
         break;
-    case 1:
-        MixerMenu();
-        break;
+    case MAIN_MENU:
+        if (activeItem == 2)
+        {
+            SetMenu(SOUND_MENU);
+            return;
+        }
+    case SOUND_MENU:
+        activeItem = 2;
+        SetMenu(MAIN_MENU);
     default:
         break;
     }
-}
-
-void SoundMenu(void)
-{
-    currentMenu = 0;
-    activeItem = 0;
-}
-
-/**
-  * @brief Main Menu
-  */
-void MenuSystem::MixerMenu()
-{
-    // char spk[4];
-
-    // sprintf(spk, "%d", WM8978_SPK_Volume);
-    // spk[4] = '\0';
-
-    lcd->drawHLine(0, 8, 83);
-    lcd->refreshScr();
-    lcd->print("MIXER        X", 0, 0);
-    //  lcd->goXY(0,20);
-    // lcd->print(spk, 0, 1);
-    lcd->print("Headphones 100", 0, 2);
-    lcd->print("LineIn      --", 0, 3);
-    lcd->print("Microphone  --", 0, 4);
-    lcd->print("<  >     MIXER", 0, 5);
-}
-
-/**
-  * @brief Main Menu
-  */
-void DelayMenu(LCD *lcd)
-{
-    lcd->drawHLine(0, 8, 83);
-    lcd->refreshScr();
-    lcd->print("DELAY         ", 0, 0);
-    //  lcd->goXY(0,20);
-    lcd->print("Speed       90", 0, 1);
-    lcd->print("Feedback   100", 0, 2);
-    lcd->print("Filter      --", 0, 3);
-    lcd->print("            --", 0, 4);
-    lcd->print("<  >     MIXER", 0, 5);
-}
-
-/**
-  * @brief Main Menu
-  */
-void BlankPage(LCD *lcd)
-{
-    lcd->drawHLine(0, 8, 83);
-    lcd->refreshScr();
-    lcd->print("BLANK      MIX", 0, 0);
-    //  lcd->goXY(0,20);
-    //   lcd->print("Speed       90", 0, 1);
-    //   lcd->print("Feedback   100", 0, 2);
-    //   lcd->print("Filter      --", 0, 3);
-    //   lcd->print("            --", 0, 4);
-    lcd->print("<  >     MIXER", 0, 5);
+    switch (activeItem)
+    {
+    case 0:
+        // set to scroll thru pages
+        scrollMode = true;
+        RefreshMenu();
+        break;
+    case 1:
+        // set previous menu to current menu
+        // show mixer menu
+        SetMenu(MIXER_MENU);
+        break;
+    default:
+        // switch (currentMenu)
+        // {
+        // case MAIN_MENU:
+        //     break;
+        // case MIXER_MENU:
+        //     break;
+        // default:
+        //     break;
+        // }
+        break;
+    }
 }
 
 /**
@@ -161,6 +127,31 @@ void BlankPage(LCD *lcd)
   */
 void MenuSystem::TriggerEncoder(bool direction)
 {
+
+    if (scrollMode)
+    {
+        int newmenu = (int)currentMenu;
+
+        if (direction)
+        {
+            newmenu--;
+            if (newmenu > 3)
+            {
+                newmenu = 3;
+            }
+        }
+        else
+        {
+            newmenu++;
+            if (newmenu > 3)
+            {
+                newmenu = 0;
+            }
+        }
+
+        SetMenu((PSMenus)newmenu);
+        return;
+    }
 
     if (direction)
     {
@@ -178,12 +169,117 @@ void MenuSystem::TriggerEncoder(bool direction)
             activeItem = activeItemCount - 1;
         }
     }
-
-    MenuSelect();
+    RefreshMenu();
 }
 
 void MenuSystem::TriggerPushEncoder()
 {
-    submenu = !submenu;
     MenuSelect();
+}
+
+/**
+  * @brief Main Menu
+  */
+void MenuSystem::MainMenu()
+{
+    currentMenu = MAIN_MENU;
+    switch (activeItem)
+    {
+    case 0:
+        lcd->print("SINE", 0, 0);
+        lcd->print("Freq       440", 0, 1);
+        lcd->print("Mod        100", 0, 2);
+        lcd->print("Rate      1200", 0, 3);
+        lcd->print("- - - -       ", 0, 4);
+        lcd->print("         MIXER", 0, 5);
+        lcd->invertText(true);
+        lcd->print("<  >", 0, 5);
+        lcd->invertText(false);
+        break;
+    case 1:
+        lcd->print("SINE", 0, 0);
+        lcd->print("Freq       440", 0, 1);
+        lcd->print("Mod        100", 0, 2);
+        lcd->print("Rate      1200", 0, 3);
+        lcd->print("- - - -       ", 0, 4);
+        lcd->print("<  >", 0, 5);
+        lcd->invertText(true);
+        lcd->print("MIXER", 54, 5);
+        lcd->invertText(false);
+        break;
+    case 2:
+        lcd->invertText(true);
+        lcd->print("SINE", 0, 0);
+        lcd->invertText(false);
+        lcd->print("Freq       440", 0, 1);
+        lcd->print("Mod        100", 0, 2);
+        lcd->print("Rate      1200", 0, 3);
+        lcd->print("- - - -       ", 0, 4);
+        lcd->print("<  >     MIXER", 0, 5);
+        break;
+    default:
+        break;
+    }
+}
+
+/**
+  * @brief Mixer
+  */
+void MenuSystem::MixerMenu()
+{
+    currentMenu = MIXER_MENU;
+
+    char hp[4];
+    sprintf(hp, "%d", audio->HP_Volume);
+    hp[4] = '\0';
+    char spk[4];
+    sprintf(spk, "%d", audio->SPK_Volume);
+    spk[4] = '\0';
+
+    lcd->drawHLine(0, 9, 83);
+    lcd->refreshScr();
+
+    lcd->invertText(true);
+    lcd->print("             X", 0, 0);
+    lcd->invertText(false);
+    lcd->print("MIXER        ", 0, 0);
+    lcd->print("Headphones   ", 0, 2);
+    lcd->print(hp, 60, 1);
+    lcd->print("LineOut      ", 0, 3);
+    lcd->print(spk, 60, 2);
+    lcd->print("LineIn      --", 0, 4);
+    lcd->print("Mic         --", 0, 5);
+}
+/**
+  * @brief Sound select Menu
+  */
+void MenuSystem::SoundMenu()
+{
+    currentMenu = SOUND_MENU;
+    char colour[4][10] = {"Blue", "Red", "Orange",
+                          "Yellow"};
+    lcd->drawHLine(0, 8, 83);
+    lcd->refreshScr();
+    lcd->print("SOUND        X", 0, 0);
+
+    for (int i = 0; i < 3; i++)
+    {
+        lcd->print(colour[i], 0, i + 1);
+    }
+}
+
+/**
+  * @brief Delay Menu
+  */
+void MenuSystem::DelayMenu()
+{
+    lcd->drawHLine(0, 8, 83);
+    lcd->refreshScr();
+    lcd->print("DELAY         ", 0, 0);
+    //  lcd->goXY(0,20);
+    lcd->print("Speed       90", 0, 1);
+    lcd->print("Feedback   100", 0, 2);
+    lcd->print("Filter      --", 0, 3);
+    lcd->print("            --", 0, 4);
+    lcd->print("<  >     MIXER", 0, 5);
 }

@@ -1,4 +1,4 @@
-App/Src/lcd.o: ../App/Src/lcd.cpp ../App/Inc/lcd.h ../App/Inc/font.h \
+App/Src/LCD.o: ../App/Src/LCD.cpp ../App/Inc/lcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -33,14 +33,9 @@ App/Src/lcd.o: ../App/Src/lcd.cpp ../App/Inc/lcd.h ../App/Inc/font.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../App/Inc/c64enh_font.h ../App/Inc/times_dig_16x24_font.h \
- ../App/Inc/term9x14_font.h ../App/Inc/tiny3x7_font.h \
- ../App/Inc/small4x7_font.h ../App/Inc/small5x7_font.h \
- ../App/Inc/small5x7bold_font.h
+ ../App/Inc/ascii.h ../App/Inc/ascii_3.h ../App/Inc/ascii_4.h
 
 ../App/Inc/lcd.h:
-
-../App/Inc/font.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -110,16 +105,8 @@ App/Src/lcd.o: ../App/Src/lcd.cpp ../App/Inc/lcd.h ../App/Inc/font.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../App/Inc/c64enh_font.h:
+../App/Inc/ascii.h:
 
-../App/Inc/times_dig_16x24_font.h:
+../App/Inc/ascii_3.h:
 
-../App/Inc/term9x14_font.h:
-
-../App/Inc/tiny3x7_font.h:
-
-../App/Inc/small4x7_font.h:
-
-../App/Inc/small5x7_font.h:
-
-../App/Inc/small5x7bold_font.h:
+../App/Inc/ascii_4.h:
